@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="main-content">
+
+    <!-- HEADER -->
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start mb-4 gap-3">
+        <div>
+            <h2 class="fw-bold">Notifications</h2>
+            <p class="text-muted fw-semibold">Consultez toutes vos notifications</p>
+        </div>
+        <div class="text-start text-sm-end flex-shrink-0">
+            <div class="mb-1">
+                <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle">S1</a>
+                <a href="#" class="btn btn-primary btn-sm rounded-circle">S2</a>
+            </div>
+            <p class="fw-bold text-primary mb-0">Semestre II - 2023/2024</p>
+        </div>
+    </div>
+
+    <!-- FILTRES -->
+    <div class="d-flex flex-wrap gap-2 mb-4">
+        <button class="btn btn-primary rounded-pill px-4 filtre-btn active" data-filtre="tout">Tout</button>
+        <button class="btn btn-outline-secondary rounded-pill px-4 filtre-btn" data-filtre="non-lu">Non lus</button>
+        <button class="btn btn-outline-secondary rounded-pill px-4 filtre-btn" data-filtre="lu">Lus</button>
+        <button class="btn btn-outline-danger rounded-pill px-4 ms-auto" id="btnToutLire">
+            <i class="bi bi-check2-all me-1"></i> <span class="d-none d-sm-inline">Tout marquer comme lu</span><span class="d-inline d-sm-none">Tout lire</span>
+        </button>
+    </div>
+
+    <!-- LISTE NOTIFICATIONS -->
+    <div id="listeNotifications">
+
+        <!-- Notif non lue -->
+        <div class="card border rounded-4 p-3 mb-3 notif-item non-lu" style="border-left: 4px solid #F21212 !important;">
+            <div class="d-flex align-items-start gap-3">
+                <div class="rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
+                     style="width:50px; height:50px; background:#FEE2E2;">
+                    <i class="bi bi-bell-fill text-danger fs-4"></i>
+                </div>
+                <div class="flex-grow-1" style="min-width:0;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+                        <h6 class="fw-bold mb-1">Absence signalée</h6>
+                        <span class="badge bg-danger rounded-pill">Non lu</span>
+                    </div>
+                    <p class="text-muted small mb-1">Le professeur D'algorithmique a signalé son absence donc ne sera pas là le lundi</p>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i>Il y a 2 heures</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notif non lue -->
+        <div class="card border rounded-4 p-3 mb-3 notif-item non-lu" style="border-left: 4px solid #D97706 !important;">
+            <div class="d-flex align-items-start gap-3">
+                <div class="rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
+                     style="width:50px; height:50px; background:#FEF3C7;">
+                    <i class="bi bi-exclamation-triangle-fill text-warning fs-4"></i>
+                </div>
+                <div class="flex-grow-1" style="min-width:0;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+                        <h6 class="fw-bold mb-1">Paiement en attente</h6>
+                        <span class="badge bg-warning text-dark rounded-pill">Non lu</span>
+                    </div>
+                    <p class="text-muted small mb-1">Votre paiement de la première tranche est en attente de vérification</p>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i>Il y a 5 heures</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notif lue -->
+        <div class="card border rounded-4 p-3 mb-3 notif-item lu" style="border-left: 4px solid #16A34A !important;">
+            <div class="d-flex align-items-start gap-3">
+                <div class="rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
+                     style="width:50px; height:50px; background:#DCFCE7;">
+                    <i class="bi bi-check2-all text-success fs-4"></i>
+                </div>
+                <div class="flex-grow-1" style="min-width:0;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+                        <h6 class="fw-bold mb-1">Reçu téléchargé</h6>
+                        <span class="badge bg-success rounded-pill">Lu</span>
+                    </div>
+                    <p class="text-muted small mb-1">Votre reçu pour la deuxième tranche a été reçu et vérifié avec succès</p>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i>Hier à 14h30</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notif lue -->
+        <div class="card border rounded-4 p-3 mb-3 notif-item lu" style="border-left: 4px solid #1E90FF !important;">
+            <div class="d-flex align-items-start gap-3">
+                <div class="rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
+                     style="width:50px; height:50px; background:#EFF6FF;">
+                    <i class="bi bi-info-circle-fill text-primary fs-4"></i>
+                </div>
+                <div class="flex-grow-1" style="min-width:0;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+                        <h6 class="fw-bold mb-1">Nouvelle note disponible</h6>
+                        <span class="badge bg-primary rounded-pill">Lu</span>
+                    </div>
+                    <p class="text-muted small mb-1">Votre note de Base de données du semestre 2 est maintenant disponible</p>
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i>Il y a 2 jours</small>
+                </div>
+            </div>
+        </div>
+
+        <div id="aucuneNotif" class="text-center text-muted py-5 d-none">
+            <i class="bi bi-bell-slash fs-1"></i>
+            <p class="mt-2 fw-semibold">Aucune notification</p>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

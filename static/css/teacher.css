@@ -1,0 +1,791 @@
+:root {
+    --bg1: #F3F4F6;
+    --bg2: #FFFFFF;
+    --text: #616161;
+    --title: #161414;
+    --bleu: #1E90FF;
+    --button: #aed5e7;
+    --red: #F21212;
+    --success: #16A34A;
+    --danger: #D97706;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg1);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    margin-left: 240px;
+}
+
+/* ══════════════════════════════
+   TOPBAR MOBILE
+   (visible uniquement en dessous de 768px)
+══════════════════════════════ */
+.topbar-mobile {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    background: var(--bg2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    z-index: 1100;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.2rem;
+}
+
+.topbar-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--title);
+    letter-spacing: 0.05em;
+}
+
+.topbar-logo span {
+    color: var(--bleu);
+}
+
+.topbar-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bleu);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+/* ══════════════════════════════
+   NAV SIDEBAR (desktop)
+══════════════════════════════ */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 240px;
+    height: 100vh;
+    background: var(--bg2);
+    padding-top: 20px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+}
+
+/* ── LOGO ── */
+.logo {
+    padding: 1rem;
+    text-align: center;
+}
+
+.logo h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--title);
+    letter-spacing: 0.05em;
+}
+
+.logo span {
+    color: var(--bleu);
+}
+
+/* ── SEPARATEUR ── */
+.separateur {
+    width: 85%;
+    height: 1px;
+    background: #E0E0E0;
+    border: none;
+    margin: 0.5rem 0;
+}
+
+/* ── MENU ── */
+.nav-menu {
+    padding: 1rem;
+    width: 100%;
+}
+
+.nav-menu .title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    opacity: 0.5;
+    padding: 1rem 0.5rem 0.4rem;
+    margin-top: 0.5rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+    padding: 0;
+}
+
+li a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 0.95rem;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+li a i {
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+li a:hover {
+    background: var(--button);
+    color: var(--bleu);
+}
+
+li a:hover i {
+    color: var(--bleu);
+}
+
+/* ── LIEN ACTIF ── */
+.links.active {
+    background-color: var(--button);
+    color: var(--bleu);
+    border-radius: 8px;
+}
+
+.links.active i {
+    color: var(--bleu);
+}
+
+/* ── USER CARD ── */
+.user-card {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.2rem;
+    border-top: 1px solid #E0E0E0;
+    transition: background 0.2s;
+}
+
+.user-card:hover {
+    background: #f5f5f5;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bleu);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--title);
+}
+
+.user-role {
+    font-size: 0.75rem;
+    color: var(--text);
+    opacity: 0.7;
+}
+
+/* ══════════════════════════════
+   CONTENU PRINCIPAL
+══════════════════════════════ */
+.main-content {
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+ .dash-title {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--title);
+        margin: 0;
+    }
+    .dash-subtitle {
+        font-size: 0.85rem;
+        color: var(--text);
+        margin: 2px 0 0;
+    }
+
+    .semester-badge {
+        color: #1E90FF;
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+    .date-badge {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 5px 12px;
+        font-size: 0.82rem;
+        color: #444;
+        background: #fff;
+    }
+
+    /* ── Stat cards ── */
+    .stat-card {
+        background: #fff;
+        border: 1px solid #e3e6ea;
+        border-radius: 14px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        height: 100%;
+    }
+    .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+    }
+    .stat-icon-wrap {
+        width: 40px; height: 40px;
+        border-radius: 10px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.2rem;
+        margin-bottom: 6px;
+    }
+    .stat-number {
+        font-size: 1.8rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--title);
+    }
+    .stat-label {
+        font-size: 0.75rem;
+        color: var(--text);
+        font-weight: 500;
+    }
+    .stat-link {
+        font-size: 0.78rem;
+        color: #1E90FF;
+        text-decoration: none;
+        font-weight: 600;
+        margin-top: 6px;
+        display: flex; align-items: center; gap: 4px;
+    }
+    .stat-link:hover { text-decoration: underline; }
+
+    /* ── Panels ── */
+    .panel {
+        background: #fff;
+        border: 1px solid #e3e6ea;
+        border-radius: 14px;
+        padding: 20px;
+    }
+    .panel-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--title);
+    }
+    .panel-link {
+        font-size: 0.82rem;
+        color: #1E90FF;
+        text-decoration: none;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    .panel-link:hover { text-decoration: underline; }
+
+    /* ── Lignes de cours ── */
+    .course-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+        border-bottom: 1px solid #f3f4f6;
+    }
+    .course-row:last-child { border-bottom: none; }
+    .course-icon-wrap {
+        width: 34px; height: 34px;
+        border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.95rem;
+        flex-shrink: 0;
+    }
+    .course-name {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--title);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .course-code {
+        font-size: 0.72rem;
+        color: var(--text);
+    }
+    .course-count {
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-align: right;
+        color: var(--title);
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .course-count small {
+        display: block;
+        font-weight: 400;
+        font-size: 0.68rem;
+        color: var(--text);
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+        position: relative;
+        padding-left: 8px;
+    }
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 22px;
+        top: 14px;
+        bottom: 14px;
+        width: 2px;
+        background: #e3e6ea;
+    }
+    .timeline-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 0;
+        position: relative;
+    }
+    .timeline-dot {
+        width: 10px; height: 10px;
+        border-radius: 50%;
+        background: #1E90FF;
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 2px #1E90FF;
+        flex-shrink: 0;
+        margin-top: 7px;
+    }
+    .time-badge {
+        background: #e8f0fe;
+        color: #1E90FF;
+        font-weight: 700;
+        font-size: 0.78rem;
+        border-radius: 8px;
+        padding: 5px 8px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .sched-name {
+        font-size: 0.86rem;
+        font-weight: 700;
+        color: var(--title);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .sched-meta {
+        font-size: 0.73rem;
+        color: var(--text);
+        margin-top: 2px;
+    }
+    .sched-count {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--title);
+        margin-left: auto;
+        text-align: right;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .sched-count small {
+        display: block;
+        font-weight: 400;
+        font-size: 0.68rem;
+        color: var(--text);
+    }
+
+    /* ── Bouton emploi du temps ── */
+    .btn-emploi {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        background: #fff;
+        color: #333;
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 10px 18px;
+        width: 100%;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s;
+    }
+    .btn-emploi:hover {
+        background: #e8f0fe;
+        color: #1E90FF;
+    }
+
+    .page-title{
+    color: var(--title);
+    font-weight: 700;
+}
+
+.page-subtitle{
+    color: var(--text);
+}
+
+.course-card{
+    background: var(--bg2);
+    border: 1px solid #E5E7EB;
+    border-radius: 24px;
+    padding: 2rem;
+    height: 100%;
+    transition: all .3s ease;
+}
+
+.course-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
+
+.course-icon{
+    color: var(--bleu);
+    font-size: 2.5rem;
+}
+
+.course-title{
+    color: var(--title);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.course-description{
+    color: var(--text);
+    font-size: 1rem;
+    line-height: 1.7;
+    min-height: 80px;
+}
+
+.course-students{
+    color: var(--bleu);
+    font-size: 1.1rem;
+    margin: 1.5rem 0;
+}
+
+.course-students span{
+    color: var(--title);
+    margin-left: .4rem;
+}
+
+.btn-view{
+    background-color: var(--button);
+    color: var(--title);
+    border: none;
+    border-radius: 12px;
+    padding: 10px 30px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.btn-view:hover{
+    background-color: var(--bleu);
+    color: white;
+}
+
+/* ══════════════════════════════
+   PAGE NOTES & RESULTAT
+══════════════════════════════ */
+.selecteur-label {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--title);
+}
+
+.table-notes thead th {
+    font-weight: 700;
+    color: var(--title);
+    border-bottom: 2px solid #E5E7EB !important;
+}
+
+.note-input {
+    max-width: 90px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.pagination-custom .page-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--title);
+    text-decoration: none;
+}
+
+.pagination-custom .page-btn.active {
+    background: #DBEAFE;
+    color: var(--bleu);
+    border-color: #DBEAFE;
+}
+
+.pagination-custom .page-btn:hover {
+    background: #f0f4f8;
+}
+
+/* ── PAGE PRESENCES ── */
+.statut-cell {
+    white-space: nowrap;
+}
+
+.statut-radio {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--title);
+    cursor: pointer;
+    margin: 0;
+}
+
+.statut-radio input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--bleu);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE MOBILE (≤ 768px)
+   → topbar en haut + nav en bas
+══════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* body : plus de marge gauche, espace haut (topbar) + bas (bottom nav) */
+    body {
+        margin-left: 0;
+        margin-top: 56px;
+        margin-bottom: 65px;
+    }
+
+    /* Afficher la topbar mobile */
+    .topbar-mobile {
+        display: flex;
+    }
+
+    /* ── NAV EN BAS ── */
+    nav {
+        flex-direction: row;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        padding-top: 0;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+        justify-content: space-around;
+        align-items: center;
+        overflow-x: auto;
+    }
+
+    /* Masquer logo, titre et séparateur */
+    .logo,
+    .nav-menu .title,
+    .separateur {
+        display: none;
+    }
+
+    /* nav-menu occupe toute la hauteur de la barre */
+    .nav-menu {
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Liste horizontale répartie uniformément */
+    .nav-menu ul {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        height: 100%;
+    }
+
+    /* Chaque lien : icône au-dessus, label en dessous */
+    li a {
+        flex-direction: column;
+        justify-content: center;
+        padding: 0.4rem 0.5rem;
+        font-size: 0.62rem;
+        text-align: center;
+        gap: 2px;
+        white-space: nowrap;
+        border-radius: 6px;
+    }
+
+    li a i {
+        font-size: 1.3rem;
+        margin-right: 0;
+    }
+
+    /* Cacher la carte utilisateur en mobile */
+    .user-card {
+        display: none;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+    
+
+    /* En-tête empilé */
+        .dash-title { font-size: 1.1rem; }
+        .dash-subtitle { font-size: 0.78rem; }
+        .semester-badge { font-size: 0.82rem; }
+        .date-badge { font-size: 0.75rem; padding: 4px 10px; }
+
+        /* Stat cards : 2 colonnes sur mobile (col-6 déjà dans HTML) */
+        .stat-number { font-size: 1.5rem; }
+        .stat-label { font-size: 0.7rem; }
+        .stat-link { font-size: 0.72rem; }
+        .stat-icon-wrap { width: 34px; height: 34px; font-size: 1rem; }
+
+        /* Panels pleine largeur (col-12 déjà dans HTML) */
+        .panel { padding: 14px; }
+        .panel-title { font-size: 0.9rem; }
+
+        /* Cours : texte plus petit */
+        .course-name { font-size: 0.8rem; }
+        .course-code { font-size: 0.68rem; }
+        .course-count { font-size: 0.78rem; }
+        .course-icon-wrap { width: 30px; height: 30px; font-size: 0.85rem; }
+
+        /* Timeline compacte */
+        .time-badge { font-size: 0.72rem; padding: 4px 6px; }
+        .sched-name { font-size: 0.8rem; }
+        .sched-meta { font-size: 0.68rem; }
+        .timeline::before { left: 19px; }
+
+        /* Bouton emploi du temps */
+        .btn-emploi { font-size: 0.8rem; padding: 8px 14px; }
+      .course-card{
+        padding: 1.5rem;
+    }
+
+    .course-title{
+        font-size: 1.4rem;
+    }
+
+    .course-description{
+        min-height: auto;
+    }
+
+    /* ── Page Notes & resultat ── */
+    .selecteur-label { font-size: 0.95rem; }
+    .table-notes { font-size: 0.85rem; }
+    .note-input { max-width: 70px; }
+    .pagination-custom .page-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 0.85rem;
+    }
+
+    /* ── Page Etudiants ── */
+    .table-notes td[style*="max-width:220px"] {
+        max-width: 130px !important;
+    }
+
+    /* ── Page Presences ── */
+    .statut-radio {
+        font-size: 0.8rem;
+        gap: 0.35rem;
+    }
+    .statut-radio input[type="radio"] {
+        width: 15px;
+        height: 15px;
+    }
+
+}
+
+/* Téléphones très étroits */
+@media (max-width: 400px) {
+    li a {
+        font-size: 0.52rem;
+        padding: 0.3rem 0.25rem;
+    }
+
+    li a i {
+        font-size: 1.1rem;
+    }
+
+    .stat-number {
+    font-size: 1.3rem; 
+    }
+    .stat-label { 
+    font-size: 0.65rem; 
+    }
+    .stat-link {
+    display: none; 
+    } /* trop petit pour être utile */
+    .course-name { 
+    font-size: 0.75rem; 
+    }
+    .sched-count small {
+     display: none; 
+    }
+
+    /* Page Notes & resultat */
+    .note-input { max-width: 55px; }
+    .pagination-custom { gap: 4px !important; }
+    .pagination-custom .page-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+    }
+
+}

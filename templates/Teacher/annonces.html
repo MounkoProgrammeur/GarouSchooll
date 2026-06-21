@@ -1,0 +1,75 @@
+{% extends "Teacher/base1.html" %}
+
+
+{% block content %}
+
+<div class="main-content">
+
+    <!-- HEADER -->
+    <h2 class="fw-bold mb-1">Annonces</h2>
+    <p class="text-muted mb-4">Publiez une annonce pour vos étudiants</p>
+
+    <div class="row g-4">
+
+        <!-- COLONNE FORMULAIRE -->
+        <div class="col-12 col-lg-8">
+
+            <div class="mb-4">
+                <label class="form-label fw-bold">Titre</label>
+                <input type="text" class="form-control rounded-3 py-2" placeholder="Ex : Contrôle continu">
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-bold">Votre Message</label>
+                <textarea class="form-control rounded-3" rows="9" placeholder=""></textarea>
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label fw-bold">Pièce jointe(facultatif)</label>
+                <div class="row g-2 align-items-center">
+                    <div class="col-12 col-md-7">
+                        <input type="file" class="form-control rounded-3">
+                    </div>
+                    <div class="col-12 col-md-5 d-flex justify-content-end gap-2">
+                        <button class="btn btn-outline-secondary rounded-3 fw-bold px-4 flex-fill flex-md-grow-0">Annuler</button>
+                        <button class="btn btn-primary rounded-3 fw-bold px-4 flex-fill flex-md-grow-0">Publier l'annonce</button>
+                    </div>
+                </div>
+                <small class="text-muted d-block mt-2">PDF, PNG, JPG max 5Mo</small>
+            </div>
+
+        </div>
+
+        <!-- COLONNE DESTINATAIRES -->
+        <div class="col-12 col-lg-4">
+            <p class="fw-bold mb-3">Destinataires</p>
+            <div class="d-flex flex-column gap-3">
+                <label class="d-flex align-items-center gap-2 fw-semibold">
+                    <input type="checkbox" class="form-check-input m-0" style="width:22px; height:22px;">
+                    Toutes les classes
+                </label>
+                <label class="d-flex align-items-center gap-2 fw-semibold">
+                    <input type="checkbox" class="form-check-input m-0" style="width:22px; height:22px;">
+                    Genie logiciel
+                </label>
+                <label class="d-flex align-items-center gap-2 fw-semibold">
+                    <input type="checkbox" class="form-check-input m-0" style="width:22px; height:22px;">
+                    Réseaux
+                </label>
+                <label class="d-flex align-items-center gap-2 fw-semibold">
+                    <input type="checkbox" class="form-check-input m-0" style="width:22px; height:22px;">
+                    developpement web
+                </label>
+                <label class="d-flex align-items-center gap-2 fw-semibold">
+                    <input type="checkbox" class="form-check-input m-0" style="width:22px; height:22px;">
+                    Base de donnée
+                </label>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock%}

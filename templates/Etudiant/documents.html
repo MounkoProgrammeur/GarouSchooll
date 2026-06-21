@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="main-content">
+
+    <!-- HEADER -->
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start mb-3 gap-3">
+        <div>
+            <h2 class="fw-bold">Documents</h2>
+            <h4 class="fw-bold mt-2">Mes documents académiques</h4>
+            <p class="text-muted fw-semibold">Consultez et téléchargez vos documents officiels</p>
+        </div>
+        <div class="text-start text-sm-end flex-shrink-0">
+            <div class="mb-1">
+                <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle">S1</a>
+                <a href="#" class="btn btn-primary btn-sm rounded-circle">S2</a>
+            </div>
+            <p class="fw-bold text-primary mb-0">Semestre II - 2023/2024</p>
+        </div>
+    </div>
+
+    <!-- BARRE RECHERCHE + TRI -->
+    <div class="card border rounded-4 p-3 mb-3">
+        <div class="d-flex flex-column flex-md-row gap-3 align-items-stretch align-items-md-center">
+            <div class="input-group rounded-pill overflow-hidden border w-100" style="max-width:450px;">
+                <span class="input-group-text bg-white border-0">
+                    <i class="bi bi-search text-muted"></i>
+                </span>
+                <input type="text"
+                       id="rechercheDoc"
+                       class="form-control border-0 shadow-none"
+                       placeholder="Rechercher un document...">
+            </div>
+            <div class="ms-md-auto w-100" style="max-width:280px;">
+                <select id="triDoc" class="form-select rounded-pill border">
+                    <option value="recent">Trier par : Plus récent</option>
+                    <option value="ancien">Trier par : Plus ancien</option>
+                    <option value="nom">Trier par : Nom</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- LISTE DES DOCUMENTS -->
+    <div id="listeDocuments">
+
+        <div class="card border rounded-4 p-3 mb-3 document-item" data-nom="Certificat de scolarité" data-date="2024">
+            <div class="d-flex align-items-center gap-3 flex-wrap">
+                <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                     style="width:55px; height:55px; background:#DBEAFE;">
+                    <i class="bi bi-folder-fill text-primary fs-4"></i>
+                </div>
+                <div class="flex-grow-1" style="min-width:0;">
+                    <h6 class="fw-bold mb-1 text-truncate">Certificat de scolarité</h6>
+                    <span class="text-danger small fw-semibold me-3">
+                        <i class="bi bi-file-earmark-pdf-fill"></i> PDF
+                    </span>
+                    <span class="text-muted small fw-semibold">2024-2025</span>
+                </div>
+                <div class="d-flex align-items-center gap-3 flex-shrink-0">
+                    <div class="dropdown">
+                        <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical fs-5"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow border-0">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Aperçu</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-download me-2"></i>Télécharger</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-share me-2"></i>Partager</a></li>
+                        </ul>
+                    </div>
+                    <a href="#" class="text-primary">
+                        <i class="bi bi-download fs-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border rounded-4 p-3 mb-3 document-item" data-nom="Relevé des notes semestre 1" data-date="2024">
+            <div class="d-flex align-items-center gap-3 flex-wrap">
+                <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                     style="width:55px; height:55px; background:#DBEAFE;">
+                    <i class="bi bi-folder-fill text-primary fs-4"></i>
+                </div>
+                <div class="flex-grow-1" style="min-width:0;">
+                    <h6 class="fw-bold mb-1 text-truncate">Relevé des notes semestre 1</h6>
+                    <span class="text-danger small fw-semibold me-3">
+                        <i class="bi bi-file-earmark-pdf-fill"></i> PDF
+                    </span>
+                    <span class="text-muted small fw-semibold">2024-2025</span>
+                </div>
+                <div class="d-flex align-items-center gap-3 flex-shrink-0">
+                    <div class="dropdown">
+                        <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical fs-5"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow border-0">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Aperçu</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-download me-2"></i>Télécharger</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-share me-2"></i>Partager</a></li>
+                        </ul>
+                    </div>
+                    <a href="#" class="text-primary">
+                        <i class="bi bi-download fs-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border rounded-4 p-3 mb-3 document-item" data-nom="Récue de paiements tranche 1" data-date="2024">
+            <div class="d-flex align-items-center gap-3 flex-wrap">
+                <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                     style="width:55px; height:55px; background:#DBEAFE;">
+                    <i class="bi bi-folder-fill text-primary fs-4"></i>
+                </div>
+                <div class="flex-grow-1" style="min-width:0;">
+                    <h6 class="fw-bold mb-1 text-truncate">Récue de paiements tranche 1</h6>
+                    <span class="text-danger small fw-semibold me-3">
+                        <i class="bi bi-file-earmark-pdf-fill"></i> PDF
+                    </span>
+                    <span class="text-muted small fw-semibold">2024-2025</span>
+                </div>
+                <div class="d-flex align-items-center gap-3 flex-shrink-0">
+                    <div class="dropdown">
+                        <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical fs-5"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow border-0">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Aperçu</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-download me-2"></i>Télécharger</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-share me-2"></i>Partager</a></li>
+                        </ul>
+                    </div>
+                    <a href="#" class="text-primary">
+                        <i class="bi bi-download fs-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border rounded-4 p-3 mb-3 document-item" data-nom="Attestation d'inscription" data-date="2024">
+            <div class="d-flex align-items-center gap-3 flex-wrap">
+                <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                     style="width:55px; height:55px; background:#DBEAFE;">
+                    <i class="bi bi-folder-fill text-primary fs-4"></i>
+                </div>
+                <div class="flex-grow-1" style="min-width:0;">
+                    <h6 class="fw-bold mb-1 text-truncate">Attestation d'inscription</h6>
+                    <span class="text-danger small fw-semibold me-3">
+                        <i class="bi bi-file-earmark-pdf-fill"></i> PDF
+                    </span>
+                    <span class="text-muted small fw-semibold">2024-2025</span>
+                </div>
+                <div class="d-flex align-items-center gap-3 flex-shrink-0">
+                    <div class="dropdown">
+                        <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical fs-5"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow border-0">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Aperçu</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-download me-2"></i>Télécharger</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-share me-2"></i>Partager</a></li>
+                        </ul>
+                    </div>
+                    <a href="#" class="text-primary">
+                        <i class="bi bi-download fs-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message aucun résultat -->
+        <div id="aucunResultat" class="text-center text-muted py-4 d-none">
+            <i class="bi bi-search fs-1"></i>
+            <p class="mt-2 fw-semibold">Aucun document trouvé</p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

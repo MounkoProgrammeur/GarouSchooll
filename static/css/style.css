@@ -1,0 +1,410 @@
+:root {
+    --bg1: #F3F4F6;
+    --bg2: #FFFFFF;
+    --text: #616161;
+    --title: #161414;
+    --bleu: #1E90FF;
+    --button: #aed5e7;
+    --red: #F21212;
+    --success: #16A34A;
+    --danger: #D97706;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg1);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    margin-left: 240px;
+}
+
+/* ── NAV ── */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 240px;
+    height: 100vh;
+    background: var(--bg2);
+    padding-top: 20px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+}
+
+/* ── LOGO ── */
+.logo {
+    padding: 1rem;
+    text-align: center;
+}
+
+.logo h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--title);
+    letter-spacing: 0.05em;
+}
+
+.logo span {
+    color: var(--bleu);
+}
+
+/* ── SEPARATEUR ── */
+.separateur {
+    width: 85%;
+    height: 1px;
+    background: #E0E0E0;
+    border: none;
+    margin: 0.5rem 0;
+}
+
+/* ── MENU ── */
+.nav-menu {
+    padding: 1rem;
+    width: 100%;
+}
+
+.nav-menu .title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    opacity: 0.5;
+    padding: 1rem 0.5rem 0.4rem;
+    margin-top: 0.5rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+    padding: 0;
+}
+
+li a {
+    display: block;
+    padding: 0.75rem 0.95rem;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+li a:hover {
+    background: var(--button);
+    color: var(--bleu);
+}
+
+/* ── USER CARD ── */
+.user-card {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.2rem;
+    border-top: 1px solid #E0E0E0;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bleu);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--title);
+}
+
+.user-role {
+    font-size: 0.75rem;
+    color: var(--text);
+    opacity: 0.7;
+}
+li a i {
+    margin-right: 0.5rem;
+    font-size: 1rem;
+}
+.main-content {
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+.links.active{
+    background-color: #aed5e7;
+    color: #1E90FF;
+    border-radius: 8px;
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE — MENU HORIZONTAL EN BAS
+   ════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    body {
+        margin-left: 0;
+        margin-top: 56px;    /* laisse de la place pour la topbar en haut */
+        margin-bottom: 70px; /* laisse de la place pour la nav en bas */
+    }
+
+    nav {
+        flex-direction: row;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        padding-top: 0;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+        justify-content: space-around;
+        align-items: center;
+        overflow-x: auto;
+        z-index: 1000;
+    }
+
+    /* Logo et titres de section inutiles en bas d'écran */
+    .logo,
+    .nav-menu .title,
+    .separateur {
+        display: none;
+    }
+
+    .nav-menu {
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-menu ul {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    li a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.4rem 0.5rem;
+        font-size: 0.65rem;
+        text-align: center;
+        white-space: nowrap;
+        gap: 2px;
+    }
+
+    li a i {
+        margin-right: 0;
+        font-size: 1.3rem;
+    }
+
+    /* Carte utilisateur cachée en bas (visible ailleurs si besoin) */
+    .user-card {
+        display: none;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+}
+
+/* Encore plus petit (téléphones étroits) : on réduit un peu plus */
+@media (max-width: 400px) {
+    li a {
+        font-size: 0.55rem;
+        padding: 0.3rem 0.3rem;
+    }
+
+    li a i {
+        font-size: 1.1rem;
+    }
+}
+
+/* ── CHART WRAPPER (page performances) ── */
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 350px;
+}
+
+@media (max-width: 768px) {
+    .chart-wrapper {
+        height: 250px;
+    }
+}
+
+/* ── PAGES PAIEMENT (1ère/2ème tranche, moratoire) ── */
+
+/* Bordure verticale uniquement à partir de tablette (md) */
+.border-end-md {
+    border-right: 0;
+}
+@media (min-width: 768px) {
+    .border-end-md {
+        border-right: 1px solid #dee2e6;
+    }
+}
+
+/* Sur mobile, on remplace la séparation verticale par une ligne horizontale */
+@media (max-width: 767.98px) {
+    .border-bottom-mobile {
+        border-bottom: 1px solid #dee2e6;
+    }
+}
+
+/* Onglets paiement plus compacts sur mobile pour ne pas casser la ligne */
+@media (max-width: 480px) {
+    .small-sm {
+        font-size: 0.8rem;
+    }
+}
+
+/* ── PAGE DOCUMENTS ── */
+@media (max-width: 480px) {
+    .document-item h6 {
+        max-width: 150px;
+    }
+}
+
+/* ── TOPBAR MOBILE (avatar profil en haut à droite) ── */
+.topbar-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .topbar-mobile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 56px;
+        background: var(--bg2);
+        padding: 0 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        z-index: 1001;
+    }
+
+    .topbar-logo {
+        font-family: 'Orbitron', monospace;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--title);
+        letter-spacing: 0.05em;
+        margin: 0;
+    }
+
+    .topbar-logo span {
+        color: var(--bleu);
+    }
+
+    .topbar-avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--bleu);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.8rem;
+        text-decoration: none;
+        flex-shrink: 0;
+    }
+}
+
+/* ════════════════════════════════════
+   ANIMATIONS — apparition page & scroll
+   ════════════════════════════════════ */
+
+/* Animation d'apparition de la page au chargement */
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.main-content {
+    animation: fadeInPage 0.45s ease-out;
+}
+
+/* Léger effet d'apparition pour le menu lui-même au chargement */
+nav {
+    animation: fadeInPage 0.4s ease-out;
+}
+
+/* Eléments révélés au scroll (cartes, notifications, documents...) */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Petit effet au survol des cartes pour renforcer la fluidité */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* Respecte les utilisateurs qui préfèrent moins d'animations */
+@media (prefers-reduced-motion: reduce) {
+    .main-content,
+    nav,
+    .reveal-on-scroll {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

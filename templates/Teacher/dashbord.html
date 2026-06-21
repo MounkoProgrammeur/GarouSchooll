@@ -1,0 +1,232 @@
+{% extends "Teacher/base1.html" %}
+
+{% block content %}
+
+<!-- ══════════════════════════════════════
+     EN-TÊTE DE PAGE
+══════════════════════════════════════ -->
+<div class="d-flex flex-wrap align-items-start justify-content-between gap-3 mb-4">
+    <div>
+        <h2 class="dash-title">Bonjour M. NGONO <span class="wave"></span></h2>
+        <p class="dash-subtitle">Bienvenue dans votre espace enseignant</p>
+    </div>
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+        <span class="semester-badge">
+            <i class="bi bi-mortarboard-fill me-1"></i> Semestre II - 2023/2024
+        </span>
+        <span class="date-badge">
+            <i class="bi bi-calendar3 me-1"></i> Mercredi 15 mai 2026
+        </span>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     CARTES DE STATISTIQUES
+══════════════════════════════════════ -->
+<div class="row g-3 mb-4">
+
+    <div class="col-6 col-xl-3">
+        <div class="stat-card">
+            <div class="stat-icon-wrap" style="background:#e8f5e9;">
+                <i class="bi bi-people-fill" style="color:#2e7d32;"></i>
+            </div>
+            <div class="stat-number">245</div>
+            <div class="stat-label">Étudiants inscrits</div>
+            <a href="#" class="stat-link">Voir les étudiants <i class="bi bi-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-6 col-xl-3">
+        <div class="stat-card">
+            <div class="stat-icon-wrap" style="background:#e3f2fd;">
+                <i class="bi bi-book-fill" style="color:#1565c0;"></i>
+            </div>
+            <div class="stat-number">15</div>
+            <div class="stat-label">Cours assignés</div>
+            <a href="#" class="stat-link">Voir mes cours <i class="bi bi-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-6 col-xl-3">
+        <div class="stat-card">
+            <div class="stat-icon-wrap" style="background:#fff3e0;">
+                <i class="bi bi-clipboard-check-fill" style="color:#e65100;"></i>
+            </div>
+            <div class="stat-number">8</div>
+            <div class="stat-label">Notes à saisir</div>
+            <a href="#" class="stat-link">Saisir les notes <i class="bi bi-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-6 col-xl-3">
+        <div class="stat-card">
+            <div class="stat-icon-wrap" style="background:#fce4ec;">
+                <i class="bi bi-calendar-check-fill" style="color:#c62828;"></i>
+            </div>
+            <div class="stat-number">3</div>
+            <div class="stat-label">Cours aujourd'hui</div>
+            <a href="#" class="stat-link">Voir le planning <i class="bi bi-arrow-right"></i></a>
+        </div>
+    </div>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     MES COURS + COURS D'AUJOURD'HUI
+══════════════════════════════════════ -->
+<div class="row g-3">
+
+    <!-- Mes cours -->
+    <div class="col-12 col-lg-6">
+        <div class="panel h-100">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h6 class="panel-title mb-0">
+                    <i class="bi bi-journal-bookmark-fill me-2 text-primary"></i>Mes cours
+                </h6>
+                <a href="#" class="panel-link">
+                    Voir tout <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="course-row">
+                <div class="course-icon-wrap" style="background:#e3f2fd;">
+                    <i class="bi bi-globe" style="color:#1565c0;"></i>
+                </div>
+                <div class="flex-grow-1 overflow-hidden">
+                    <div class="course-name">Programmations Web</div>
+                    <div class="course-code">INF220</div>
+                </div>
+                <div class="course-count">220 <small>Étudiants</small></div>
+                <div class="dropdown">
+                    <button class="btn btn-link p-0 text-muted" data-bs-toggle="dropdown">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Voir</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Modifier</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-row">
+                <div class="course-icon-wrap" style="background:#fce4ec;">
+                    <i class="bi bi-database-fill" style="color:#c62828;"></i>
+                </div>
+                <div class="flex-grow-1 overflow-hidden">
+                    <div class="course-name">Base de Données</div>
+                    <div class="course-code">INF220</div>
+                </div>
+                <div class="course-count">300 <small>Étudiants</small></div>
+                <div class="dropdown">
+                    <button class="btn btn-link p-0 text-muted" data-bs-toggle="dropdown">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Voir</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Modifier</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-row">
+                <div class="course-icon-wrap" style="background:#e8f5e9;">
+                    <i class="bi bi-router-fill" style="color:#2e7d32;"></i>
+                </div>
+                <div class="flex-grow-1 overflow-hidden">
+                    <div class="course-name">Réseaux informatique</div>
+                    <div class="course-code">INF220</div>
+                </div>
+                <div class="course-count">300 <small>Étudiants</small></div>
+                <div class="dropdown">
+                    <button class="btn btn-link p-0 text-muted" data-bs-toggle="dropdown">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Voir</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Modifier</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-row">
+                <div class="course-icon-wrap" style="background:#fff3e0;">
+                    <i class="bi bi-cpu-fill" style="color:#e65100;"></i>
+                </div>
+                <div class="flex-grow-1 overflow-hidden">
+                    <div class="course-name">Système d'exploitation</div>
+                    <div class="course-code">INF220</div>
+                </div>
+                <div class="course-count">300 <small>Étudiants</small></div>
+                <div class="dropdown">
+                    <button class="btn btn-link p-0 text-muted" data-bs-toggle="dropdown">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Voir</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Modifier</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Cours d'aujourd'hui -->
+    <div class="col-12 col-lg-6">
+        <div class="panel h-100">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h6 class="panel-title mb-0">
+                    <i class="bi bi-calendar2-day-fill me-2 text-primary"></i>Cours d'aujourd'hui
+                </h6>
+            </div>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="time-badge">08:00</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <div class="sched-name">Programmations Web</div>
+                        <div class="sched-meta">
+                            <i class="bi bi-geo-alt me-1"></i>Salle 220
+                        </div>
+                    </div>
+                    <div class="sched-count">220 <small>Étudiants</small></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="time-badge">10:00</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <div class="sched-name">Base de Données</div>
+                        <div class="sched-meta">
+                            <i class="bi bi-geo-alt me-1"></i>Salle 105
+                        </div>
+                    </div>
+                    <div class="sched-count">300 <small>Étudiants</small></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="time-badge">14:00</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <div class="sched-name">Réseaux informatique</div>
+                        <div class="sched-meta">
+                            <i class="bi bi-geo-alt me-1"></i>Salle 220
+                        </div>
+                    </div>
+                    <div class="sched-count">300 <small>Étudiants</small></div>
+                </div>
+
+            </div>
+
+            <a href="#" class="btn-emploi mt-3">
+                <i class="bi bi-calendar3 me-2"></i> Voir mon emploi du temps
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

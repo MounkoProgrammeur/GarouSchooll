@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %} 
+
+
+<!-- CONTENU PRINCIPAL -->
+<div class="main-content" id="dashbord">
+
+    <!-- HEADER -->
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start mb-4 gap-3">
+        <h2 class="fw-bold mb-0">Mon Tableau de Bord</h2>
+        <div class="text-start text-sm-end w-100 w-sm-auto">
+            <div class="mb-1">
+                <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle">S1</a>
+                <a href="#" class="btn btn-primary btn-sm rounded-circle">S2</a>
+            </div>
+            <p class="fw-bold text-primary mb-0">Semestre II - 2023/2024</p>
+        </div>
+    </div>
+
+    <!-- GRILLE : CARTES + NOTIFICATIONS -->
+    <div class="row g-4">
+
+        <!-- COLONNE CARTES -->
+        <div class="col-12 col-lg-8">
+            <div class="row g-3 g-md-4">
+
+                <!-- Carte Matières Validées -->
+                <div class="col-6 col-md-6">
+                    <div class="card border-0 shadow-sm rounded-4 p-2 p-md-3 text-center h-100">
+                        <div class="fs-2 mb-1"><i style="color: var(--success);" class="bi bi-check2-square"></i></div>
+                        <div class="fs-2 fw-bold text-primary">6/8</div>
+                        <p class="fw-semibold mb-0">Matiere Validé</p>
+                        <small class="text-success fw-semibold">75% de reussite</small>
+                    </div>
+                </div>
+
+                <!-- Carte Moyenne Générale -->
+                <div class="col-6 col-md-6">
+                    <div class="card border-0 shadow-sm rounded-4 p-2 p-md-3 text-center h-100">
+                        <div class="fs-2 mb-1"><i style="color: var(--title);" class="bi bi-book-fill"></i></div>
+                        <div class="fs-2 fw-bold text-primary">13,4</div>
+                        <p class="fw-semibold mb-0">Moyenne Generale</p>
+                    </div>
+                </div>
+
+                <!-- Carte Absences -->
+                <div class="col-6 col-md-6">
+                    <div class="card border-0 shadow-sm rounded-4 p-2 p-md-3 text-center h-100">
+                        <div class="fs-2 mb-1"><i style="color: var(--danger);" class="bi bi-exclamation-triangle-fill"></i></div>
+                        <div class="fs-2 fw-bold text-primary">3</div>
+                        <p class="fw-semibold mb-0">Absences</p>
+                        <small class="fw-semibold" style="color: var(--danger);">Cette Semaine</small>
+                    </div>
+                </div>
+
+                <!-- Carte Paiements -->
+                <div class="col-6 col-md-6">
+                    <div class="card border-0 shadow-sm rounded-4 p-2 p-md-3 text-center h-100">
+                        <div class="fs-2 mb-1"><i class="bi bi-cash-coin"></i></div>
+                        <div class="fs-2 fw-bold text-primary">50%</div>
+                        <p class="fw-semibold mb-0">Payements éffectués</p>
+                        <small class="fw-semibold" style="color: var(--danger);">Tranche 2 en attente</small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- COLONNE NOTIFICATIONS -->
+        <div class="col-12 col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4 p-3 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="fw-bold mb-0"><i class="bi bi-bell-fill"></i>   Notifications recentes</h6>
+                    <a href="{% url 'notifications' %}" class="text-primary text-decoration-none small fw-semibold">Voir Tout</a>
+                </div>
+
+                <!-- Notif 1 -->
+                <div class="d-flex gap-3 mb-3">
+                    <div class="notif-icon bg-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:45px; height:45px;">
+                        <i class="bi bi-bell-fill text-white fs-5"></i>
+                    </div>
+                    <div>
+                        <p class="fw-bold mb-0 small">Absence</p>
+                        <p class="text-muted mb-0" style="font-size:0.78rem;">Le professeur D'algorithmique a signalé son absence donc ne sera pas la le lundi</p>
+                    </div>
+                </div>
+
+                <!-- Notif 2 -->
+                <div class="d-flex gap-3 mb-3">
+                    <div class="notif-icon bg-warning rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:45px; height:45px;">
+                        <i class="bi bi-exclamation-triangle-fill text-white fs-5"></i>
+                    </div>
+                    <div>
+                        <p class="fw-bold mb-0 small">Paiement en attente</p>
+                        <p class="text-muted mb-0" style="font-size:0.78rem;">Votre paiement de la première tranche est en attente de vérification</p>
+                    </div>
+                </div>
+
+                <!-- Notif 3 -->
+                <div class="d-flex gap-3">
+                    <div class="notif-icon bg-success rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:45px; height:45px;">
+                        <i class="bi bi-check2-all text-white fs-5"></i>
+                    </div>
+                    <div>
+                        <p class="fw-bold mb-0 small">Reçue téléchargé</p>
+                        <p class="text-muted mb-0" style="font-size:0.78rem;">Votre reçue pour la deuxième tranche a été reçue et vérifié avec succès</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+{% endblock %}

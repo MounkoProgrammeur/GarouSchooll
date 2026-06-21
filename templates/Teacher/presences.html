@@ -1,0 +1,211 @@
+{% extends "Teacher/base1.html" %}
+
+
+{% block content %}
+
+
+<div class="main-content">
+
+    <!-- HEADER -->
+    <h2 class="fw-bold mb-1">Présence</h2>
+    <p class="text-muted mb-4">enregistrez les présences, absences et retard de vos étudiants</p>
+
+    <!-- SELECTEURS -->
+    <div class="row g-3 align-items-end mb-3">
+        <div class="col-12 col-md-3">
+            <p class="selecteur-label mb-1">Cours</p>
+            <select class="form-select rounded-3 py-2">
+                <option>CC - Control continu</option>
+                <option>TPE</option>
+                <option>Examen</option>
+            </select>
+        </div>
+        <div class="col-12 col-md-3">
+            <p class="selecteur-label mb-1">Date</p>
+            <input type="date" class="form-control rounded-3 py-2" value="2026-06-15">
+        </div>
+        <div class="col-12 col-md-3">
+            <p class="selecteur-label mb-1">Seance</p>
+            <select class="form-select rounded-3 py-2">
+                <option>Seance 8(12h00-14h00)</option>
+                <option>Seance 7(10h00-12h00)</option>
+                <option>Seance 6(08h00-10h00)</option>
+            </select>
+        </div>
+        <div class="col-12 col-md-3">
+            <button class="btn btn-primary w-100 rounded-3 py-2 fw-bold">Charger</button>
+        </div>
+    </div>
+
+    <!-- TABLEAU -->
+    <div class="card border rounded-4 p-3 p-md-4 mb-3">
+        <div class="table-responsive">
+            <table class="table table-notes align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th style="width:50px;">N<sup>o</sup></th>
+                        <th>Matricule</th>
+                        <th>Noms &amp; prenom</th>
+                        <th class="text-center" colspan="2">Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-bold">1</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut1" checked> Presence
+                            </label>
+                        </td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut1"> Absence
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">2</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut2" checked> Presence
+                            </label>
+                        </td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut2"> Absence
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">3</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut3" checked> Presence
+                            </label>
+                        </td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut3"> Absence
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">4</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut4" checked> Presence
+                            </label>
+                        </td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut4"> Absence
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">5</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut5" checked> Presence
+                            </label>
+                        </td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut5"> Absence
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">6</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut6" checked> Presence
+                            </label>
+                        </td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut6"> Absence
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">7</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut7" checked> Presence
+                            </label>
+                        </td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut7"> Absence
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">8</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut8" checked> Presence
+                            </label>
+                        </td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut8"> Absence
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">9</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut9" checked> Presence
+                            </label>
+                        </td>
+                        <td class="statut-cell">
+                            <label class="statut-radio">
+                                <input type="radio" name="statut9"> Absence
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="d-flex justify-content-center align-items-center gap-2 pagination-custom mt-3 flex-wrap">
+            <a href="#" class="page-btn"><i class="bi bi-chevron-left"></i></a>
+            <a href="#" class="page-btn active">1</a>
+            <a href="#" class="page-btn">2</a>
+            <a href="#" class="page-btn">3</a>
+            <span class="fw-bold">...</span>
+            <a href="#" class="page-btn">4</a>
+        </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="d-flex flex-column flex-sm-row gap-2">
+        <button class="btn btn-primary rounded-3 fw-bold px-4 py-2">Valider la presence</button>
+        <button class="btn btn-outline-secondary rounded-3 fw-bold px-4 py-2">Exporter(Excel)</button>
+    </div>
+
+</div>
+
+{% endblock%}

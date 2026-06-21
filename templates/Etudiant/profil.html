@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="main-content">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-start mb-4">
+        <div>
+            <h2 class="fw-bold">Mon Profil</h2>
+            <p class="text-muted fw-semibold">Vos informations personnelles et académiques</p>
+        </div>
+        <div class="text-end">
+            <div class="mb-1">
+                <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle">S1</a>
+                <a href="#" class="btn btn-primary btn-sm rounded-circle">S2</a>
+            </div>
+            <p class="fw-bold text-primary mb-0">Semestre II - 2023/2024</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- CARTE PROFIL -->
+        <div class="col-md-4">
+            <div class="card border rounded-4 p-4 text-center">
+                <div class="avatar rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
+                     style="width:90px; height:90px; background:#1E90FF; font-size:2rem; color:white; font-weight:700;">
+                    AA
+                </div>
+                <h5 class="fw-bold mb-0">Adamou Abba</h5>
+                <p class="text-muted small mb-2">Etudiant</p>
+                <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">L2 Informatique</span>
+                <hr>
+                <div class="text-start">
+                    <p class="small fw-semibold mb-2">
+                        <i class="bi bi-person-badge-fill me-2 text-primary"></i>
+                        <span class="text-muted">Matricule :</span> INF2024001
+                    </p>
+                    <p class="small fw-semibold mb-2">
+                        <i class="bi bi-building-fill me-2 text-primary"></i>
+                        <span class="text-muted">Département :</span> Informatique
+                    </p>
+                    <p class="small fw-semibold mb-2">
+                        <i class="bi bi-calendar-fill me-2 text-primary"></i>
+                        <span class="text-muted">Année :</span> 2024-2025
+                    </p>
+                    <p class="small fw-semibold mb-0">
+                        <i class="bi bi-geo-alt-fill me-2 text-primary"></i>
+                        <span class="text-muted">Ville :</span> Garoua
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- INFOS ACADEMIQUES -->
+        <div class="col-md-8">
+
+            <!-- Stats rapides -->
+            <div class="row g-3 mb-4">
+                <div class="col-4">
+                    <div class="card border rounded-4 p-3 text-center">
+                        <h4 class="fw-bold text-primary mb-0">13,4</h4>
+                        <small class="text-muted fw-semibold">Moyenne générale</small>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card border rounded-4 p-3 text-center">
+                        <h4 class="fw-bold text-success mb-0">6/8</h4>
+                        <small class="text-muted fw-semibold">Matières validées</small>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card border rounded-4 p-3 text-center">
+                        <h4 class="fw-bold text-warning mb-0">3</h4>
+                        <small class="text-muted fw-semibold">Absences</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informations personnelles -->
+            <div class="card border rounded-4 p-4 mb-4">
+                <h6 class="fw-bold mb-3">
+                    <i class="bi bi-person-fill me-2 text-primary"></i>Informations personnelles
+                </h6>
+                <div class="row g-2">
+                    <div class="col-6">
+                        <p class="small text-muted mb-0">Nom complet</p>
+                        <p class="fw-semibold">Adamou Abba</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="small text-muted mb-0">Date de naissance</p>
+                        <p class="fw-semibold">15 Mars 2002</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="small text-muted mb-0">Email</p>
+                        <p class="fw-semibold">adamou@garouschool.cm</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="small text-muted mb-0">Téléphone</p>
+                        <p class="fw-semibold">+237 6XX XXX XXX</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="small text-muted mb-0">Sexe</p>
+                        <p class="fw-semibold">Masculin</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="small text-muted mb-0">Nationalité</p>
+                        <p class="fw-semibold">Camerounais</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Situation académique -->
+            <div class="card border rounded-4 p-4">
+                <h6 class="fw-bold mb-3">
+                    <i class="bi bi-mortarboard-fill me-2 text-primary"></i>Situation académique
+                </h6>
+                <div class="row g-2">
+                    <div class="col-6">
+                        <p class="small text-muted mb-0">Niveau</p>
+                        <p class="fw-semibold">Licence 2 (L2)</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="small text-muted mb-0">Filière</p>
+                        <p class="fw-semibold">Informatique</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="small text-muted mb-0">Statut</p>
+                        <span class="badge bg-success rounded-pill">Inscrit</span>
+                    </div>
+                    <div class="col-6">
+                        <p class="small text-muted mb-0">Paiement</p>
+                        <span class="badge bg-warning text-dark rounded-pill">Tranche 2 en attente</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

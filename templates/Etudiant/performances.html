@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="main-content">
+
+    <!-- HEADER -->
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start mb-4 gap-3">
+        <h2 class="fw-bold fst-italic mb-0">Visualisez votre performances juste en fonction de votre progression</h2>
+        <div class="text-start text-sm-end flex-shrink-0">
+            <div class="mb-1">
+                <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle">S1</a>
+                <a href="#" class="btn btn-primary btn-sm rounded-circle">S2</a>
+            </div>
+            <p class="fw-bold text-primary mb-0">Semestre II - 2023/2024</p>
+        </div>
+    </div>
+
+    <!-- CARTE GRAPHIQUE -->
+    <div class="card border rounded-4 p-3 p-md-4">
+        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3 gap-2">
+            <p class="fst-italic fw-semibold mb-0">Courbe de performance par matiere</p>
+            <a href="#" class="btn btn-outline-secondary btn-sm rounded-pill px-3">Semestre Actuel</a>
+        </div>
+
+        <div class="chart-wrapper">
+            <canvas id="performanceChart"></canvas>
+        </div>
+
+        <!-- LEGENDE -->
+        <div class="d-flex gap-3 gap-md-4 mt-4 flex-wrap">
+            <div class="d-flex align-items-center gap-2">
+                <span style="width:16px; height:16px; border-radius:50%; background:#16A34A; display:inline-block; flex-shrink:0;"></span>
+                <span class="fst-italic text-muted small">Matières bien maitrisé(>=14)</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <span style="width:16px; height:16px; border-radius:50%; background:#D97706; display:inline-block; flex-shrink:0;"></span>
+                <span class="fst-italic text-muted small">Matières a renforcer(10 - 13,99)</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <span style="width:16px; height:16px; border-radius:50%; background:#F21212; display:inline-block; flex-shrink:0;"></span>
+                <span class="fst-italic text-muted small">Matières en difficulté(<10)</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}

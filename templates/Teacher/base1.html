@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/teacher.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>GarouSchool</title>
+</head>
+<body>
+
+<!-- TOPBAR MOBILE (visible uniquement sur petit écran) -->
+<div class="topbar-mobile">
+    <h1 class="topbar-logo">Garou<span>School</span></h1>
+    <a href="" class="topbar-avatar">AA</a>
+</div>
+
+<!-- SIDEBAR NAV -->
+<nav>
+    <div class="logo">
+        <h1>Garou<span>School</span></h1>
+    </div>
+    <hr class="separateur">
+    <div class="nav-menu">
+        <p class="title">MENU PRINCIPAL</p>
+       <ul>
+    <li>
+        <a class="links" href="{% url 'dashboard' %}">
+            <i class="bi bi-house-door-fill"></i> Tableau de bord
+        </a>
+    </li>
+    <li>
+        <a class="links" href="{% url 'cours' %}">
+            <i class="bi bi-book-fill"></i> Mes Cours
+        </a>
+    </li>
+    <li>
+        <a class="links" href="{% url 'notes' %}">
+            <i class="bi bi-clipboard-data-fill"></i> Notes &amp; Résultat
+        </a>
+    </li>
+    <li>
+        <a class="links" href="{% url 'etudiants' %}">
+            <i class="bi bi-people-fill"></i> Étudiants
+        </a>
+    </li>
+    <li>
+        <a class="links" href="{% url 'presences' %}">
+            <i class="bi bi-calendar-check-fill"></i> Présences
+        </a>
+    </li>
+    <li>
+        <a class="links" href="{% url 'annonces' %}">
+            <i class="bi bi-megaphone-fill"></i> Annonces
+        </a>
+    </li>
+    <li>
+        <a class="links" href="{% url 'parametres' %}">
+            <i class="bi bi-gear-fill"></i> Paramètres
+        </a>
+    </li>
+</ul>
+    </div>
+
+    <a href="" class="user-card text-decoration-none">
+        <div class="avatar">AA</div>
+        <div class="user-info">
+            <span class="user-name">M. NGONO</span>
+            <span class="user-role">Dr en informatique</span>
+        </div>
+    </a>
+</nav>
+
+<!-- CONTENU PRINCIPAL -->
+<div class="main-content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/teacher.js' %}"></script>
+
+</body>
+</html>

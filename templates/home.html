@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garouschool</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg1: #F3F4F6;
+      --bg2: #FFFFFF;
+      --text: #616161;
+      --title: #161414;
+      --bleu: #1E90FF;
+      --button: #aed5e7;
+      --red: #F21212;
+      --success: #16A34A;
+      --danger: #D97706;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      color: var(--text);
+      background: var(--bg2);
+    }
+
+    /* PAGE SWITCHING */
+    .page { display: none; min-height: 100vh; flex-direction: column; }
+    .page.active { display: flex; }
+
+    /* NAVBAR */
+    .navbar {
+      background: rgba(255,255,255,0.85) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bg1);
+      height: 5rem;
+    }
+    .logo-icon {
+      width: 3rem; height: 3rem;
+      background: var(--bleu);
+      border-radius: 0.75rem;
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      box-shadow: 0 4px 12px rgba(30,144,255,0.25);
+      flex-shrink: 0;
+    }
+    .logo-text { font-size: 1.25rem; font-weight: 800; color: var(--title); letter-spacing: -0.02em; }
+    .logo-text span { color: var(--bleu); }
+
+    /* HERO */
+    .hero-section {
+      position: relative; overflow: hidden;
+      background: var(--bg2);
+      padding: 8rem 0 6rem;
+    }
+    .hero-blob {
+      position: absolute; top: 0; right: 0;
+      transform: translate(33%, -3rem);
+      opacity: 0.12; pointer-events: none; z-index: 1;
+    }
+    .hero-blob-inner {
+      width: 600px; height: 600px;
+      background: var(--bleu);
+      border-radius: 50%; filter: blur(64px);
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-title {
+      font-size: 2.5rem; font-weight: 800;
+      line-height: 1.1; letter-spacing: -0.025em;
+      color: var(--title);
+    }
+    @media(min-width: 768px){ .hero-title { font-size: 3.75rem; } }
+    .hero-title span { color: var(--bleu); }
+
+    .fade-in { animation: fadeInUp 0.5s ease; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* FEATURES */
+    .features-section { background: var(--bg1); padding: 6rem 0; }
+    .feature-card {
+      background: var(--bg2); padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      border: 1px solid var(--bg1); height: 100%;
+      transition: box-shadow 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
+      opacity: 0; transform: translateY(20px);
+    }
+    .feature-card.visible { opacity: 1; transform: translateY(0); }
+    .feature-card:hover { box-shadow: 0 4px 16px rgba(30,144,255,0.1); }
+    .feature-icon-wrapper {
+      width: 3.5rem; height: 3.5rem;
+      background: var(--button);
+      border-radius: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bleu);
+    }
+
+    /* CTA */
+    .cta-section {
+      background: var(--bleu); padding: 5rem 0;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(0,0,0,0.05);
+    }
+
+    /* FOOTER */
+    .footer-section { background: var(--title); color: white; padding: 3rem 0; }
+    .footer-logo-icon {
+      width: 2.5rem; height: 2.5rem;
+      background: white; border-radius: 0.5rem; padding: 0.25rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .footer-inner-icon {
+      width: 100%; height: 100%;
+      background: var(--bleu); border-radius: 0.4rem;
+      display: flex; align-items: center; justify-content: center; color: white;
+    }
+
+    /* LOGIN */
+    .login-page-inner { min-height: 100vh; display: flex; }
+    .login-form-side { width: 100%; display: flex; flex-direction: column; }
+    @media(min-width: 992px){ .login-form-side { width: 50%; } }
+
+    .login-form-inner {
+      width: 100%; max-width: 28rem;
+      margin: 0 auto; animation: fadeInUp 0.5s ease;
+    }
+    .login-logo-icon {
+      width: 4rem; height: 4rem;
+      background: var(--bleu); border-radius: 0.75rem;
+      display: flex; align-items: center; justify-content: center;
+      color: white; box-shadow: 0 4px 12px rgba(30,144,255,0.25);
+    }
+
+    .input-icon-wrapper { position: relative; }
+    .input-icon {
+      position: absolute; left: 0.875rem; top: 50%;
+      transform: translateY(-50%);
+      color: var(--text); pointer-events: none; z-index: 5;
+    }
+    .form-input-custom {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--bg1);
+      font-size: 0.95rem; outline: none;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s ease;
+      color: var(--title);
+    }
+    .form-input-custom:focus {
+      border-color: var(--bleu);
+      box-shadow: 0 0 0 3px rgba(30,144,255,0.15);
+    }
+
+    /* LOGIN RIGHT */
+    .login-graphic-side {
+      display: none; width: 50%;
+      background: var(--title);
+      position: relative; align-items: center; justify-content: center; overflow: hidden;
+    }
+    @media(min-width: 992px){ .login-graphic-side { display: flex; } }
+
+    .blur-shape-1 {
+      position: absolute; top: 25%; right: -25%;
+      width: 800px; height: 800px;
+      background: rgba(30,144,255,0.2);
+      border-radius: 50%; filter: blur(120px);
+    }
+    .blur-shape-2 {
+      position: absolute; bottom: -25%; left: -25%;
+      width: 600px; height: 600px;
+      background: rgba(174,213,231,0.1);
+      border-radius: 50%; filter: blur(100px);
+    }
+    .graphic-content {
+      position: relative; z-index: 10;
+      max-width: 32rem; padding: 3rem;
+      animation: scaleIn 0.8s 0.2s ease both;
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .graphic-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 2.5rem; border-radius: 1.5rem; text-align: center;
+    }
+    .graphic-icon-wrapper {
+      background: var(--bleu); width: 5rem; height: 5rem;
+      border-radius: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto; color: white;
+      box-shadow: 0 20px 25px -5px rgba(30,144,255,0.25);
+    }
+    .floating-card {
+      position: absolute; top: -3rem; right: -3rem;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 1rem; border-radius: 0.75rem;
+      display: flex; align-items: center; gap: 0.75rem;
+      animation: floatY 4s ease-in-out infinite;
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    .floating-badge {
+      width: 2.5rem; height: 2.5rem; border-radius: 9999px;
+      background: var(--bleu);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 700; flex-shrink: 0;
+    }
+    .floating-info-title { font-size: 0.875rem; color: white; font-weight: 500; }
+    .floating-info-sub   { font-size: 0.75rem; color: var(--button); }
+  </style>
+</head>
+<body>
+
+<!-- HOME PAGE -->
+<div id="home-page" class="page active">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-md fixed-top px-3 px-lg-4">
+    <div class="container-xl">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#" onclick="showPage('home'); return false;">
+        <div class="logo-icon">
+          <i data-lucide="graduation-cap" style="width:28px;height:28px;"></i>
+        </div>
+        <span class="logo-text">Garou<span>school</span></span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto gap-md-3">
+          <li class="nav-item"><a class="nav-link fw-medium text-secondary" href="#" onclick="showPage('home'); return false;">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium text-secondary" href="#features">Fonctionnalités</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium text-secondary" href="#about">À propos</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium text-secondary" href="#contact">Contact</a></li>
+        </ul>
+        <button class="btn rounded-pill fw-medium px-4 py-2"
+          style="background:var(--title);color:white;font-size:0.875rem;"
+          onclick="showPage('login')">Se connecter</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow-1" style="padding-top:5rem;">
+
+    <!-- HERO -->
+    <section class="hero-section">
+      <div class="container-xl position-relative" style="z-index:2;">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center hero-content fade-in">
+            <h1 class="hero-title mb-4">
+              Gérez votre établissement avec <span>Garouschool</span>
+            </h1>
+            <p class="fs-5 mb-5" style="color:var(--text);line-height:1.7;">
+              La plateforme tout-en-un révolutionnaire pour simplifier l'administration, le suivi académique et la communication des universités et instituts de formation.
+            </p>
+            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3">
+              <button class="btn rounded-pill fw-semibold px-4 py-3 d-inline-flex align-items-center gap-2 shadow"
+                style="background:var(--title);color:white;font-size:1rem;"
+                onclick="showPage('login')">
+                Commencer maintenant
+                <i data-lucide="arrow-right" style="width:20px;height:20px;"></i>
+              </button>
+              <a href="#features" class="text-decoration-none">
+                <button class="btn rounded-pill fw-semibold px-4 py-3"
+                  style="background:var(--button);color:var(--bleu);font-size:1rem;">
+                  Découvrir les fonctionnalités
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-blob"><div class="hero-blob-inner"></div></div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="features-section">
+      <div class="container-xl">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold fs-2 mb-3" style="color:var(--title);">L'excellence académique repensée</h2>
+          <p class="mx-auto" style="max-width:42rem;color:var(--text);">
+            Tout ce dont vous avez besoin pour gérer votre institut efficacement, regroupé au sein d'une seule interface fluide et intuitive.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card" data-delay="0">
+              <div class="feature-icon-wrapper mb-4">
+                <i data-lucide="users" style="width:24px;height:24px;"></i>
+              </div>
+              <h3 class="fw-bold mb-3" style="font-size:1.1rem;color:var(--title);">Gestion des Étudiants</h3>
+              <p style="color:var(--text);font-size:0.875rem;line-height:1.7;margin:0;">Suivez les inscriptions, les présences et les dossiers de chaque étudiant en temps réel.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card" data-delay="100">
+              <div class="feature-icon-wrapper mb-4">
+                <i data-lucide="book-open" style="width:24px;height:24px;"></i>
+              </div>
+              <h3 class="fw-bold mb-3" style="font-size:1.1rem;color:var(--title);">Suivi Académique</h3>
+              <p style="color:var(--text);font-size:0.875rem;line-height:1.7;margin:0;">Gérez les notes, les relevés et les programmes d'enseignement de manière centralisée et sécurisée.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card" data-delay="200">
+              <div class="feature-icon-wrapper mb-4">
+                <i data-lucide="calendar" style="width:24px;height:24px;"></i>
+              </div>
+              <h3 class="fw-bold mb-3" style="font-size:1.1rem;color:var(--title);">Emplois du Temps</h3>
+              <p style="color:var(--text);font-size:0.875rem;line-height:1.7;margin:0;">Planification intelligente des cours, des examens magistraux et des séminaires avec notifications.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card" data-delay="300">
+              <div class="feature-icon-wrapper mb-4">
+                <i data-lucide="activity" style="width:24px;height:24px;"></i>
+              </div>
+              <h3 class="fw-bold mb-3" style="font-size:1.1rem;color:var(--title);">Portail Connecté</h3>
+              <p style="color:var(--text);font-size:0.875rem;line-height:1.7;margin:0;">Un espace dédié aux étudiants et au personnel pour suivre la progression académique.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container position-relative" style="z-index:10;">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <i data-lucide="shield" class="mb-4" style="width:64px;height:64px;color:white;opacity:0.9;display:block;margin:0 auto;"></i>
+            <h2 class="fw-bold mb-4 text-white" style="font-size:2rem;">Prêt à digitaliser votre institut ?</h2>
+            <p class="mb-5 fs-5" style="color:var(--button);">
+              Rejoignez les universités et écoles de formation qui font déjà confiance à Garouschool pour leur gestion quotidienne.
+            </p>
+            <button class="btn rounded-pill fw-bold px-5 py-3 shadow-lg"
+              style="background:white;color:var(--bleu);font-size:1.1rem;"
+              onclick="showPage('login')">
+              Accéder à la plateforme
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-section">
+    <div class="container-xl">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+        <div class="footer-logo-icon">
+          <div class="footer-inner-icon">
+            <i data-lucide="graduation-cap" style="width:22px;height:22px;"></i>
+          </div>
+        </div>
+        <p class="mb-0" style="color:var(--text);font-size:0.875rem;">
+          © <span id="current-year"></span> Garouschool. Tous droits réservés.
+        </p>
+        <div class="d-flex gap-4">
+          <a href="#" class="text-decoration-none" style="color:var(--text);font-size:0.875rem;">Mentions légales</a>
+          <a href="#" class="text-decoration-none" style="color:var(--text);font-size:0.875rem;">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+
+<!-- LOGIN PAGE -->
+<div id="login-page" class="page">
+  <div class="login-page-inner">
+
+    <!-- LEFT: FORM -->
+    <div class="login-form-side">
+      <div class="p-4">
+        <a href="#" class="d-inline-flex align-items-center gap-2 text-decoration-none fw-medium"
+          style="color:var(--text);font-size:0.875rem;"
+          onclick="showPage('home'); return false;">
+          <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
+          Retour à l'accueil
+        </a>
+      </div>
+
+      <div class="d-flex flex-column justify-content-center flex-grow-1 px-4 px-sm-5 py-4">
+        <div class="login-form-inner">
+
+          <div class="login-logo-icon mb-4">
+            <i data-lucide="graduation-cap" style="width:36px;height:36px;"></i>
+          </div>
+
+          <h1 class="fw-bold mb-1" style="font-size:1.875rem;color:var(--title);">Bienvenue</h1>
+          <p class="mb-4" style="color:var(--text);">Connectez-vous à votre espace personnel.</p>
+
+          <form onsubmit="event.preventDefault(); handleLogin();">
+
+            <div class="mb-3">
+              <label class="d-block mb-1 fw-medium" style="font-size:0.875rem;color:var(--title);">Adresse Email</label>
+              <div class="input-icon-wrapper">
+                <i data-lucide="mail" class="input-icon" style="width:18px;height:18px;"></i>
+                <input type="email" placeholder="jean@garouschool.com" class="form-input-custom" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="d-block mb-1 fw-medium" style="font-size:0.875rem;color:var(--title);">Mot de passe</label>
+              <div class="input-icon-wrapper">
+                <i data-lucide="lock" class="input-icon" style="width:18px;height:18px;"></i>
+                <input type="password" placeholder="••••••••" class="form-input-custom" required>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <label class="d-flex align-items-center gap-2" style="cursor:pointer;">
+                <input type="checkbox" style="accent-color:var(--bleu);">
+                <span style="font-size:0.875rem;color:var(--text);">Se souvenir de moi</span>
+              </label>
+              <a href="#" class="text-decoration-none fw-medium" style="font-size:0.875rem;color:var(--bleu);">Mot de passe oublié ?</a>
+            </div>
+
+            <button type="submit" class="btn w-100 fw-medium py-3 rounded-3 shadow-sm"
+              style="background:var(--title);color:white;font-family:'Inter',sans-serif;">
+              Se connecter
+            </button>
+
+          </form>
+
+          <p class="text-center mt-4 mb-0" style="font-size:0.875rem;color:var(--text);">
+            En vous connectant, vous acceptez nos <a href="#" class="fw-medium" style="color:var(--title);text-underline-offset:2px;">Conditions d'utilisation</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: GRAPHIC -->
+    <div class="login-graphic-side">
+      <div class="blur-shape-1"></div>
+      <div class="blur-shape-2"></div>
+
+      <div class="graphic-content">
+        <div class="graphic-card">
+          <div class="graphic-icon-wrapper mb-4">
+            <i data-lucide="graduation-cap" style="width:40px;height:40px;"></i>
+          </div>
+          <h2 class="fw-bold mb-3 text-white" style="font-size:1.875rem;">Gérez l'excellence académique</h2>
+          <p class="mb-0" style="color:var(--button);font-size:1.1rem;line-height:1.7;">
+            Une interface moderne et intuitive conçue pour unifier l'administration, les professeurs et les étudiants sur une seule plateforme.
+          </p>
+        </div>
+
+        <div class="floating-card">
+          <div class="floating-badge">18</div>
+          <div>
+            <div class="floating-info-title">Programmes gérés</div>
+            <div class="floating-info-sub">+2 ajouts récents</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    lucide.createIcons();
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+          setTimeout(() => entry.target.classList.add('visible'), delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.feature-card').forEach(card => observer.observe(card));
+  });
+
+  function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(page + '-page').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setTimeout(() => lucide.createIcons(), 50);
+  }
+
+    function handleLogin() {
+        alert('Fonction de connexion à implémenter');
+  }
+</script>
+</body>
+</html>

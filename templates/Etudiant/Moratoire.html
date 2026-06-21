@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="main-content">
+
+    <!-- HEADER -->
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start mb-3 gap-3">
+        <div>
+            <h2 class="fw-bold text-decoration-underline">Paiements</h2>
+            <h5 class="fw-bold mt-2">Gestion des paiements</h5>
+            <p class="text-muted fw-semibold">consultez vos informations de paiement et effectuez vos reglements</p>
+        </div>
+        <div class="text-start text-sm-end flex-shrink-0">
+            <div class="mb-1">
+                <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle">S1</a>
+                <a href="#" class="btn btn-primary btn-sm rounded-circle">S2</a>
+            </div>
+            <p class="fw-bold text-primary mb-0">Semestre II - 2023/2024</p>
+        </div>
+    </div>
+
+    <!-- ONGLETS -->
+    <div class="card border rounded-pill p-2 mb-3">
+        <div class="row text-center g-2 flex-nowrap overflow-auto">
+            <div class="col">
+                <a href="{% url 'paiement1' %}" class="fw-bold text-dark text-decoration-none small-sm">1ère tranche</a>
+            </div>
+            <div class="col">
+                <a href="{% url 'paiement2' %}" class="fw-bold text-dark text-decoration-none small-sm">2<sup>ème</sup> tranche</a>
+            </div>
+            <div class="col">
+                <a href="{% url 'moratoire' %}" class="fw-bold text-dark text-decoration-none border-bottom border-primary border-2 pb-1 d-inline-block small-sm">Moratoire</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARTE MONTANT MORATOIRE -->
+    <div class="card border rounded-4 p-3 mb-3">
+        <div class="row text-center align-items-center g-3">
+            <div class="col-12 col-md-4 border-end-md pb-3 pb-md-0 border-bottom-mobile">
+                <div class="d-flex align-items-center justify-content-center gap-3">
+                    <i class="bi bi-credit-card-fill text-primary fs-2"></i>
+                    <div class="text-start">
+                        <p class="mb-0 text-muted fw-semibold">Montant restant</p>
+                        <h4 class="fw-bold text-primary mb-0">100000 FCFA</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 border-end-md pb-3 pb-md-0 border-bottom-mobile">
+                <p class="mb-0 text-muted fw-semibold">Solde</p>
+                <h4 class="fw-bold text-success mb-0">150000 FCFA</h4>
+            </div>
+            <div class="col-12 col-md-4">
+                <p class="mb-0 text-muted fw-semibold">Statue</p>
+                <h4 class="fw-bold text-warning mb-0">Non Payé</h4>
+            </div>
+        </div>
+
+        <!-- CHAMP SAISIE MONTANT -->
+        <div class="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2 gap-sm-3 mt-3">
+            <label class="fw-semibold text-muted text-nowrap">Saisir le Montant :</label>
+            <input type="number"
+                   id="montantMoratoire"
+                   class="form-control rounded-3"
+                   placeholder="Ex: 50000"
+                   min="1"
+                   max="100000">
+        </div>
+        <p id="erreurMontant" class="text-danger small mt-1 mb-0 d-none">
+            <i class="bi bi-x-circle-fill"></i> Le montant ne peut pas dépasser 100000 FCFA
+        </p>
+    </div>
+
+    <!-- UPLOAD + INFOS -->
+    <div class="card border rounded-4 p-3 mb-3">
+        <div class="row g-3">
+
+            <!-- Zone Upload -->
+            <div class="col-12 col-md-6">
+                <div id="zoneUpload"
+                     class="card border rounded-4 p-4 text-center h-100"
+                     style="cursor:pointer; transition: all 0.2s; border-style: dashed !important;">
+                    <i class="bi bi-cloud-upload-fill text-primary fs-1 mb-2"></i>
+                    <h6 class="fw-bold">Téléversez le fichier</h6>
+                    <p class="text-muted small mb-1 fw-semibold">Format acceptés : PDF, JPEG, PNG, SVG</p>
+                    <p class="text-muted small fw-semibold">Taille max : 10Mo</p>
+                    <input type="file" id="recu" accept=".pdf,.jpg,.jpeg,.png,.svg" class="d-none">
+                    <span class="btn btn-outline-primary rounded-pill px-4 mt-2" id="btnChoisir">
+                        Choisir Un fichier
+                    </span>
+                    <p id="nomFichier" class="small mt-2 mb-0 fw-semibold"></p>
+                    <img id="apercu" class="img-thumbnail mt-2 d-none" style="max-height:120px;">
+                </div>
+            </div>
+
+            <!-- Informations importantes -->
+            <div class="col-12 col-md-6">
+                <div class="card border rounded-4 p-4 h-100">
+                    <h6 class="fw-bold text-primary mb-3">
+                        <i class="bi bi-info-circle-fill me-1"></i>
+                        Informations importantes
+                    </h6>
+                    <ul class="text-muted small">
+                        <li class="mb-2">Assurez Vous que le recue est lisible</li>
+                        <li class="mb-2">Le fichier doit contenir le montant payé</li>
+                        <li>Après validation, votre paiement sera en attente de vérification par le gestionnaire</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- BOUTON VALIDER -->
+    <div class="d-grid mb-3">
+        <button class="btn btn-primary btn-lg rounded-pill fw-bold py-3" id="btnValider" disabled>
+            Valider le paiement
+        </button>
+    </div>
+
+    <!-- MODAL CONFIRMATION -->
+    <div class="modal fade" id="modalConfirmation" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-body text-center p-4">
+                    <div id="modalIcone" class="fs-1 mb-3">⏳</div>
+                    <h5 class="fw-bold" id="modalTitre">Soumission en cours...</h5>
+                    <p class="text-muted" id="modalMessage">Votre reçu est en cours de traitement.</p>
+                    <div id="modalBtns" class="d-none">
+                        <button class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

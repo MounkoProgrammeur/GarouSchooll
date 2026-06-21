@@ -1,0 +1,241 @@
+{% extends "Teacher/base1.html" %}
+
+
+{% block content %}
+
+
+<div class="main-content">
+
+    <!-- HEADER -->
+    <h2 class="fw-bold mb-1">Etudiants</h2>
+    <p class="text-muted mb-4">consultez les informations de vos etudiants</p>
+
+    <!-- RECHERCHE + FILTRE COURS -->
+    <div class="row g-3 align-items-end mb-3">
+        <div class="col-12 col-md-5">
+            <p class="selecteur-label mb-1 invisible d-none d-md-block">Recherche</p>
+            <div class="input-group rounded-pill overflow-hidden border">
+                <span class="input-group-text bg-white border-0">
+                    <i class="bi bi-search text-muted"></i>
+                </span>
+                <input type="text" class="form-control border-0 shadow-none fw-semibold py-2" placeholder="rechercher un etudiant">
+            </div>
+        </div>
+        <div class="col-12 col-md-5">
+            <p class="selecteur-label mb-1">Cours</p>
+            <select class="form-select rounded-pill py-2">
+                <option>Programmation</option>
+                <option>Base de Donnés (INF335)</option>
+                <option>Algorithmique (INF211)</option>
+                <option>Réseaux (INF321)</option>
+            </select>
+        </div>
+        <div class="col-12 col-md-2">
+            <button class="btn btn-primary w-100 rounded-pill py-2 fw-bold">Rechercher</button>
+        </div>
+    </div>
+
+    <!-- TABLEAU -->
+    <div class="card border rounded-4 p-3 p-md-4 mb-3">
+        <div class="table-responsive">
+            <table class="table table-notes align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th style="width:50px;">N<sup>o</sup></th>
+                        <th>Matricule</th>
+                        <th>Noms &amp; prenom</th>
+                        <th>Cours</th>
+                        <th>Email</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-bold">1</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td>INF414</td>
+                        <td class="text-truncate" style="max-width:220px;">jimmymounko86@gmail.com</td>
+                        <td class="text-end">
+                            <div class="dropdown">
+                                <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                                    <i class="bi bi-three-dots-vertical fs-5"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow border-0">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Voir profil</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Contacter</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-bar-chart me-2"></i>Voir notes</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">2</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td>INF414</td>
+                        <td class="text-truncate" style="max-width:220px;">jimmymounko86@gmail.com</td>
+                        <td class="text-end">
+                            <div class="dropdown">
+                                <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                                    <i class="bi bi-three-dots-vertical fs-5"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow border-0">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Voir profil</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Contacter</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-bar-chart me-2"></i>Voir notes</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">3</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td>INF414</td>
+                        <td class="text-truncate" style="max-width:220px;">jimmymounko86@gmail.com</td>
+                        <td class="text-end">
+                            <div class="dropdown">
+                                <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                                    <i class="bi bi-three-dots-vertical fs-5"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow border-0">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Voir profil</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Contacter</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-bar-chart me-2"></i>Voir notes</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">4</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td>INF414</td>
+                        <td class="text-truncate" style="max-width:220px;">jimmymounko86@gmail.com</td>
+                        <td class="text-end">
+                            <div class="dropdown">
+                                <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                                    <i class="bi bi-three-dots-vertical fs-5"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow border-0">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Voir profil</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Contacter</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-bar-chart me-2"></i>Voir notes</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">5</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td>INF414</td>
+                        <td class="text-truncate" style="max-width:220px;">jimmymounko86@gmail.com</td>
+                        <td class="text-end">
+                            <div class="dropdown">
+                                <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                                    <i class="bi bi-three-dots-vertical fs-5"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow border-0">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Voir profil</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Contacter</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-bar-chart me-2"></i>Voir notes</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">6</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td>INF414</td>
+                        <td class="text-truncate" style="max-width:220px;">jimmymounko86@gmail.com</td>
+                        <td class="text-end">
+                            <div class="dropdown">
+                                <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                                    <i class="bi bi-three-dots-vertical fs-5"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow border-0">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Voir profil</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Contacter</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-bar-chart me-2"></i>Voir notes</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">7</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td>INF414</td>
+                        <td class="text-truncate" style="max-width:220px;">jimmymounko86@gmail.com</td>
+                        <td class="text-end">
+                            <div class="dropdown">
+                                <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                                    <i class="bi bi-three-dots-vertical fs-5"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow border-0">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Voir profil</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Contacter</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-bar-chart me-2"></i>Voir notes</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">8</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td>INF414</td>
+                        <td class="text-truncate" style="max-width:220px;">jimmymounko86@gmail.com</td>
+                        <td class="text-end">
+                            <div class="dropdown">
+                                <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                                    <i class="bi bi-three-dots-vertical fs-5"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow border-0">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Voir profil</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Contacter</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-bar-chart me-2"></i>Voir notes</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">9</td>
+                        <td>INF2025626</td>
+                        <td>INASS BENERI</td>
+                        <td>INF414</td>
+                        <td class="text-truncate" style="max-width:220px;">jimmymounko86@gmail.com</td>
+                        <td class="text-end">
+                            <div class="dropdown">
+                                <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                                    <i class="bi bi-three-dots-vertical fs-5"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow border-0">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Voir profil</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Contacter</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-bar-chart me-2"></i>Voir notes</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="d-flex justify-content-center align-items-center gap-2 pagination-custom mt-3 flex-wrap">
+            <a href="#" class="page-btn"><i class="bi bi-chevron-left"></i></a>
+            <a href="#" class="page-btn active">1</a>
+            <a href="#" class="page-btn">2</a>
+            <a href="#" class="page-btn">3</a>
+            <span class="fw-bold">...</span>
+            <a href="#" class="page-btn">4</a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
