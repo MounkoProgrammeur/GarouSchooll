@@ -84,3 +84,48 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.prenom} {self.nom}"
+
+
+class Notification(models.Model):
+    """
+    Notifications génériques envoyées à un utilisateur
+    (étudiant, enseignant ou admin) : absence signalée,
+    paiement en attente, nouvelle note disponible, etc.
+    """
+
+    TYPE_CHOICES = (
+        ("ABSENCE", "Absence"),
+        ("PAIEMENT", "Paiement"),
+        ("NOTE", "Note"),
+        ("ANNONCE", "Annonce"),
+        ("INFO", "Information"),
+    )
+
+    destinataire = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="notifications"
+    )
+
+    type_notification = models.CharField(
+        max_length=20,
+        choices=TYPE_CHOICES,
+        default="INFO"
+    )
+
+    titre = models.CharField(
+        max_length=150
+    )
+
+    message = models.TextField()
+
+    lu = models.BooleanField(
+        default=False
+    )
+
+    date_creation = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return f"{self.titre} - {self.destinataire}"

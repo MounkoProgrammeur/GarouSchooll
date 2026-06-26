@@ -12,10 +12,12 @@ class Cours(models.Model):
 
     nom = models.CharField(max_length=150)
 
-    enseignant = models.ForeignKey(
-        "Enseignant.Enseignant",
-        on_delete=models.CASCADE
-    )
+    responsable = models.ForeignKey(
+    "Enseignant.Enseignant",
+    on_delete=models.SET_NULL,
+    null=True,
+    blank=True
+)
 
     classe = models.ForeignKey(
         "Admin.Classe",
@@ -25,8 +27,6 @@ class Cours(models.Model):
     semestre = models.IntegerField(
         choices=SEMESTRES
     )
-
-    coefficient = models.IntegerField()
 
     credit = models.IntegerField()
 
@@ -39,13 +39,6 @@ class Seance(models.Model):
     cours = models.ForeignKey(
         Cours,
         on_delete=models.CASCADE
-    )
-
-    salle = models.ForeignKey(
-        "Admin.Salle",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True
     )
 
     date = models.DateField()
@@ -129,7 +122,6 @@ class Presence(models.Model):
     STATUS = (
         ('PRESENT', 'Présent'),
         ('ABSENT', 'Absent'),
-        ('RETARD', 'Retard')
     )
 
     seance = models.ForeignKey(

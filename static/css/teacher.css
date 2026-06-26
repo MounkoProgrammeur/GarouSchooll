@@ -26,7 +26,6 @@ body {
 
 /* ══════════════════════════════
    TOPBAR MOBILE
-   (visible uniquement en dessous de 768px)
 ══════════════════════════════ */
 .topbar-mobile {
     display: none;
@@ -88,7 +87,6 @@ nav {
     z-index: 1000;
 }
 
-/* ── LOGO ── */
 .logo {
     padding: 1rem;
     text-align: center;
@@ -106,7 +104,6 @@ nav {
     color: var(--bleu);
 }
 
-/* ── SEPARATEUR ── */
 .separateur {
     width: 85%;
     height: 1px;
@@ -115,7 +112,6 @@ nav {
     margin: 0.5rem 0;
 }
 
-/* ── MENU ── */
 .nav-menu {
     padding: 1rem;
     width: 100%;
@@ -168,7 +164,6 @@ li a:hover i {
     color: var(--bleu);
 }
 
-/* ── LIEN ACTIF ── */
 .links.active {
     background-color: var(--button);
     color: var(--bleu);
@@ -179,7 +174,6 @@ li a:hover i {
     color: var(--bleu);
 }
 
-/* ── USER CARD ── */
 .user-card {
     position: absolute;
     bottom: 1.2rem;
@@ -236,296 +230,383 @@ li a:hover i {
     min-height: 100vh;
 }
 
- .dash-title {
-        font-size: 1.4rem;
-        font-weight: 800;
-        color: var(--title);
-        margin: 0;
-    }
-    .dash-subtitle {
-        font-size: 0.85rem;
-        color: var(--text);
-        margin: 2px 0 0;
-    }
+.dash-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--title);
+    margin: 0;
+}
 
-    .semester-badge {
-        color: #1E90FF;
-        font-weight: 700;
-        font-size: 0.95rem;
-    }
-    .date-badge {
-        border: 1px solid #dee2e6;
-        border-radius: 8px;
-        padding: 5px 12px;
-        font-size: 0.82rem;
-        color: #444;
-        background: #fff;
-    }
+.dash-subtitle {
+    font-size: 0.85rem;
+    color: var(--text);
+    margin: 2px 0 0;
+}
 
-    /* ── Stat cards ── */
-    .stat-card {
-        background: #fff;
-        border: 1px solid #e3e6ea;
-        border-radius: 14px;
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        transition: transform 0.2s, box-shadow 0.2s;
-        height: 100%;
-    }
-    .stat-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.07);
-    }
-    .stat-icon-wrap {
-        width: 40px; height: 40px;
-        border-radius: 10px;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 1.2rem;
-        margin-bottom: 6px;
-    }
-    .stat-number {
-        font-size: 1.8rem;
-        font-weight: 800;
-        line-height: 1;
-        color: var(--title);
-    }
-    .stat-label {
-        font-size: 0.75rem;
-        color: var(--text);
-        font-weight: 500;
-    }
-    .stat-link {
-        font-size: 0.78rem;
-        color: #1E90FF;
-        text-decoration: none;
-        font-weight: 600;
-        margin-top: 6px;
-        display: flex; align-items: center; gap: 4px;
-    }
-    .stat-link:hover { text-decoration: underline; }
+.semester-badge {
+    color: #1E90FF;
+    font-weight: 700;
+    font-size: 0.95rem;
+}
 
-    /* ── Panels ── */
-    .panel {
-        background: #fff;
-        border: 1px solid #e3e6ea;
-        border-radius: 14px;
-        padding: 20px;
-    }
-    .panel-title {
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--title);
-    }
-    .panel-link {
-        font-size: 0.82rem;
-        color: #1E90FF;
-        text-decoration: none;
-        font-weight: 600;
-        white-space: nowrap;
-    }
-    .panel-link:hover { text-decoration: underline; }
+.date-badge {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 0.82rem;
+    color: #444;
+    background: #fff;
+}
 
-    /* ── Lignes de cours ── */
-    .course-row {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 0;
-        border-bottom: 1px solid #f3f4f6;
-    }
-    .course-row:last-child { border-bottom: none; }
-    .course-icon-wrap {
-        width: 34px; height: 34px;
-        border-radius: 8px;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 0.95rem;
-        flex-shrink: 0;
-    }
-    .course-name {
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: var(--title);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .course-code {
-        font-size: 0.72rem;
-        color: var(--text);
-    }
-    .course-count {
-        font-size: 0.82rem;
-        font-weight: 700;
-        text-align: right;
-        color: var(--title);
-        white-space: nowrap;
-        flex-shrink: 0;
-    }
-    .course-count small {
-        display: block;
-        font-weight: 400;
-        font-size: 0.68rem;
-        color: var(--text);
-    }
+/* ── Stat cards ── */
+.stat-card {
+    background: #fff;
+    border: 1px solid #e3e6ea;
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+}
 
-    /* ── Timeline ── */
-    .timeline {
-        position: relative;
-        padding-left: 8px;
-    }
-    .timeline::before {
-        content: '';
-        position: absolute;
-        left: 22px;
-        top: 14px;
-        bottom: 14px;
-        width: 2px;
-        background: #e3e6ea;
-    }
-    .timeline-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 10px 0;
-        position: relative;
-    }
-    .timeline-dot {
-        width: 10px; height: 10px;
-        border-radius: 50%;
-        background: #1E90FF;
-        border: 2px solid #fff;
-        box-shadow: 0 0 0 2px #1E90FF;
-        flex-shrink: 0;
-        margin-top: 7px;
-    }
-    .time-badge {
-        background: #e8f0fe;
-        color: #1E90FF;
-        font-weight: 700;
-        font-size: 0.78rem;
-        border-radius: 8px;
-        padding: 5px 8px;
-        white-space: nowrap;
-        flex-shrink: 0;
-    }
-    .sched-name {
-        font-size: 0.86rem;
-        font-weight: 700;
-        color: var(--title);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .sched-meta {
-        font-size: 0.73rem;
-        color: var(--text);
-        margin-top: 2px;
-    }
-    .sched-count {
-        font-size: 0.8rem;
-        font-weight: 700;
-        color: var(--title);
-        margin-left: auto;
-        text-align: right;
-        white-space: nowrap;
-        flex-shrink: 0;
-    }
-    .sched-count small {
-        display: block;
-        font-weight: 400;
-        font-size: 0.68rem;
-        color: var(--text);
-    }
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+}
 
-    /* ── Bouton emploi du temps ── */
-    .btn-emploi {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #dee2e6;
-        border-radius: 10px;
-        background: #fff;
-        color: #333;
-        font-size: 0.85rem;
-        font-weight: 600;
-        padding: 10px 18px;
-        width: 100%;
-        text-decoration: none;
-        transition: background 0.2s, color 0.2s;
-    }
-    .btn-emploi:hover {
-        background: #e8f0fe;
-        color: #1E90FF;
-    }
+.stat-icon-wrap {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+}
 
-    .page-title{
+.stat-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--title);
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.stat-link {
+    font-size: 0.78rem;
+    color: #1E90FF;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stat-link:hover { text-decoration: underline; }
+
+/* ── Panels ── */
+.panel {
+    background: #fff;
+    border: 1px solid #e3e6ea;
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.panel-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--title);
+}
+
+.panel-link {
+    font-size: 0.82rem;
+    color: #1E90FF;
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.panel-link:hover { text-decoration: underline; }
+
+/* ── Lignes de cours (dashboard) ── */
+.course-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.course-row:last-child { border-bottom: none; }
+
+.course-icon-wrap {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+.course-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--title);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.course-code {
+    font-size: 0.72rem;
+    color: var(--text);
+}
+
+.course-count {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-align: right;
+    color: var(--title);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.course-count small {
+    display: block;
+    font-weight: 400;
+    font-size: 0.68rem;
+    color: var(--text);
+}
+
+/* ── Timeline ── */
+.timeline {
+    position: relative;
+    padding-left: 8px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 22px;
+    top: 14px;
+    bottom: 14px;
+    width: 2px;
+    background: #e3e6ea;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    position: relative;
+}
+
+.timeline-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #1E90FF;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #1E90FF;
+    flex-shrink: 0;
+    margin-top: 7px;
+}
+
+.time-badge {
+    background: #e8f0fe;
+    color: #1E90FF;
+    font-weight: 700;
+    font-size: 0.78rem;
+    border-radius: 8px;
+    padding: 5px 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.sched-name {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--title);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sched-meta {
+    font-size: 0.73rem;
+    color: var(--text);
+    margin-top: 2px;
+}
+
+.sched-count {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--title);
+    margin-left: auto;
+    text-align: right;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.sched-count small {
+    display: block;
+    font-weight: 400;
+    font-size: 0.68rem;
+    color: var(--text);
+}
+
+/* ── Bouton emploi du temps ── */
+.btn-emploi {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    background: #fff;
+    color: #333;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 10px 18px;
+    width: 100%;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-emploi:hover {
+    background: #e8f0fe;
+    color: #1E90FF;
+}
+
+.page-title {
     color: var(--title);
     font-weight: 700;
 }
 
-.page-subtitle{
+.page-subtitle {
     color: var(--text);
 }
 
-.course-card{
+/* ══════════════════════════════
+   PAGE MES COURS
+══════════════════════════════ */
+.cours-card {
     background: var(--bg2);
     border: 1px solid #E5E7EB;
-    border-radius: 24px;
-    padding: 2rem;
+    border-radius: 16px;
+    padding: 1.5rem;
     height: 100%;
-    transition: all .3s ease;
+    transition: all .25s ease;
 }
 
-.course-card:hover{
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+.cours-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .08);
 }
 
-.course-icon{
-    color: var(--bleu);
-    font-size: 2.5rem;
-}
-
-.course-title{
-    color: var(--title);
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-.course-description{
-    color: var(--text);
-    font-size: 1rem;
-    line-height: 1.7;
-    min-height: 80px;
-}
-
-.course-students{
-    color: var(--bleu);
-    font-size: 1.1rem;
-    margin: 1.5rem 0;
-}
-
-.course-students span{
-    color: var(--title);
-    margin-left: .4rem;
-}
-
-.btn-view{
-    background-color: var(--button);
-    color: var(--title);
-    border: none;
+.cours-icon-wrap {
+    width: 46px;
+    height: 46px;
     border-radius: 12px;
-    padding: 10px 30px;
-    font-weight: 600;
-    transition: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    background: #E6F1FB;
+    color: #185FA5;
+    flex-shrink: 0;
 }
 
-.btn-view:hover{
-    background-color: var(--bleu);
-    color: white;
+.cours-semester-badge {
+    font-size: .72rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.cours-semester-badge.s1 {
+    background: #E6F1FB;
+    color: #185FA5;
+}
+
+.cours-semester-badge.s2 {
+    background: #EEEDFE;
+    color: #534AB7;
+}
+
+.cours-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--title);
+    line-height: 1.3;
+}
+
+.cours-desc {
+    font-size: .85rem;
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 50px;
+    margin-bottom: .75rem;
+}
+
+.cours-meta {
+    font-size: .78rem;
+    color: var(--text);
+    border-top: 1px solid #F3F4F6;
+    padding-top: .75rem;
+    margin-top: .25rem;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.cours-meta i {
+    color: var(--bleu);
+}
+
+.cours-meta strong {
+    color: var(--title);
+}
+
+.cours-code {
+    background: #F3F4F6;
+    color: var(--text);
+    font-size: .72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+}
+
+.btn-voir {
+    font-size: .82rem;
+    font-weight: 700;
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+    background: var(--bg2);
+    color: var(--title);
+    padding: 7px 18px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: .2s;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-voir:hover {
+    background: var(--bleu);
+    color: #fff;
+    border-color: var(--bleu);
 }
 
 /* ══════════════════════════════
@@ -599,23 +680,19 @@ li a:hover i {
 
 /* ══════════════════════════════
    RESPONSIVE MOBILE (≤ 768px)
-   → topbar en haut + nav en bas
 ══════════════════════════════ */
 @media (max-width: 768px) {
 
-    /* body : plus de marge gauche, espace haut (topbar) + bas (bottom nav) */
     body {
         margin-left: 0;
         margin-top: 56px;
         margin-bottom: 65px;
     }
 
-    /* Afficher la topbar mobile */
     .topbar-mobile {
         display: flex;
     }
 
-    /* ── NAV EN BAS ── */
     nav {
         flex-direction: row;
         top: auto;
@@ -630,14 +707,12 @@ li a:hover i {
         overflow-x: auto;
     }
 
-    /* Masquer logo, titre et séparateur */
     .logo,
     .nav-menu .title,
     .separateur {
         display: none;
     }
 
-    /* nav-menu occupe toute la hauteur de la barre */
     .nav-menu {
         padding: 0;
         width: 100%;
@@ -646,7 +721,6 @@ li a:hover i {
         align-items: center;
     }
 
-    /* Liste horizontale répartie uniformément */
     .nav-menu ul {
         display: flex;
         flex-direction: row;
@@ -656,7 +730,6 @@ li a:hover i {
         height: 100%;
     }
 
-    /* Chaque lien : icône au-dessus, label en dessous */
     li a {
         flex-direction: column;
         justify-content: center;
@@ -673,7 +746,6 @@ li a:hover i {
         margin-right: 0;
     }
 
-    /* Cacher la carte utilisateur en mobile */
     .user-card {
         display: none;
     }
@@ -681,48 +753,54 @@ li a:hover i {
     .main-content {
         padding: 1rem;
     }
-    
 
-    /* En-tête empilé */
-        .dash-title { font-size: 1.1rem; }
-        .dash-subtitle { font-size: 0.78rem; }
-        .semester-badge { font-size: 0.82rem; }
-        .date-badge { font-size: 0.75rem; padding: 4px 10px; }
+    .dash-title { font-size: 1.1rem; }
+    .dash-subtitle { font-size: 0.78rem; }
+    .semester-badge { font-size: 0.82rem; }
+    .date-badge { font-size: 0.75rem; padding: 4px 10px; }
 
-        /* Stat cards : 2 colonnes sur mobile (col-6 déjà dans HTML) */
-        .stat-number { font-size: 1.5rem; }
-        .stat-label { font-size: 0.7rem; }
-        .stat-link { font-size: 0.72rem; }
-        .stat-icon-wrap { width: 34px; height: 34px; font-size: 1rem; }
+    .stat-number { font-size: 1.5rem; }
+    .stat-label { font-size: 0.7rem; }
+    .stat-link { font-size: 0.72rem; }
+    .stat-icon-wrap { width: 34px; height: 34px; font-size: 1rem; }
 
-        /* Panels pleine largeur (col-12 déjà dans HTML) */
-        .panel { padding: 14px; }
-        .panel-title { font-size: 0.9rem; }
+    .panel { padding: 14px; }
+    .panel-title { font-size: 0.9rem; }
 
-        /* Cours : texte plus petit */
-        .course-name { font-size: 0.8rem; }
-        .course-code { font-size: 0.68rem; }
-        .course-count { font-size: 0.78rem; }
-        .course-icon-wrap { width: 30px; height: 30px; font-size: 0.85rem; }
+    .course-name { font-size: 0.8rem; }
+    .course-code { font-size: 0.68rem; }
+    .course-count { font-size: 0.78rem; }
+    .course-icon-wrap { width: 30px; height: 30px; font-size: 0.85rem; }
 
-        /* Timeline compacte */
-        .time-badge { font-size: 0.72rem; padding: 4px 6px; }
-        .sched-name { font-size: 0.8rem; }
-        .sched-meta { font-size: 0.68rem; }
-        .timeline::before { left: 19px; }
+    .time-badge { font-size: 0.72rem; padding: 4px 6px; }
+    .sched-name { font-size: 0.8rem; }
+    .sched-meta { font-size: 0.68rem; }
+    .timeline::before { left: 19px; }
 
-        /* Bouton emploi du temps */
-        .btn-emploi { font-size: 0.8rem; padding: 8px 14px; }
-      .course-card{
-        padding: 1.5rem;
+    .btn-emploi { font-size: 0.8rem; padding: 8px 14px; }
+
+    /* ── Page Mes Cours ── */
+    .cours-card {
+        padding: 1.2rem;
     }
 
-    .course-title{
-        font-size: 1.4rem;
+    .cours-title {
+        font-size: .95rem;
     }
 
-    .course-description{
+    .cours-desc {
         min-height: auto;
+        font-size: .82rem;
+    }
+
+    .cours-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .5rem;
+    }
+
+    .btn-voir {
+        align-self: flex-end;
     }
 
     /* ── Page Notes & resultat ── */
@@ -735,21 +813,19 @@ li a:hover i {
         font-size: 0.85rem;
     }
 
-    /* ── Page Etudiants ── */
     .table-notes td[style*="max-width:220px"] {
         max-width: 130px !important;
     }
 
-    /* ── Page Presences ── */
     .statut-radio {
         font-size: 0.8rem;
         gap: 0.35rem;
     }
+
     .statut-radio input[type="radio"] {
         width: 15px;
         height: 15px;
     }
-
 }
 
 /* Téléphones très étroits */
@@ -763,23 +839,12 @@ li a:hover i {
         font-size: 1.1rem;
     }
 
-    .stat-number {
-    font-size: 1.3rem; 
-    }
-    .stat-label { 
-    font-size: 0.65rem; 
-    }
-    .stat-link {
-    display: none; 
-    } /* trop petit pour être utile */
-    .course-name { 
-    font-size: 0.75rem; 
-    }
-    .sched-count small {
-     display: none; 
-    }
+    .stat-number { font-size: 1.3rem; }
+    .stat-label { font-size: 0.65rem; }
+    .stat-link { display: none; }
+    .course-name { font-size: 0.75rem; }
+    .sched-count small { display: none; }
 
-    /* Page Notes & resultat */
     .note-input { max-width: 55px; }
     .pagination-custom { gap: 4px !important; }
     .pagination-custom .page-btn {
@@ -787,5 +852,4 @@ li a:hover i {
         height: 28px;
         font-size: 0.75rem;
     }
-
 }

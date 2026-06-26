@@ -78,14 +78,7 @@ class Classe(models.Model):
         return self.nom
 
 
-class Salle(models.Model):
 
-    code = models.CharField(max_length=20)
-
-    capacite = models.PositiveIntegerField()
-
-    def __str__(self):
-        return f"{self.code} ({self.capacite} places)"
 
 
 class Annonce(models.Model):
@@ -118,6 +111,10 @@ class Annonce(models.Model):
 
 
 class DocumentCours(models.Model):
+    """
+    Supports de cours (PDF, slides...) déposés par
+    l'enseignant pour un cours donné.
+    """
 
     cours = models.ForeignKey(
         "Academique.Cours",
@@ -130,5 +127,33 @@ class DocumentCours(models.Model):
         upload_to="documents/"
     )
 
+    date_ajout = models.DateTimeField(
+        auto_now_add=True
+    )
+
     def __str__(self):
         return self.titre
+    
+class AffectationCours(models.Model):
+    
+    enseignant = models.ForeignKey(
+        "Enseignant.Enseignant",
+        on_delete=models.CASCADE
+    )
+
+    cours = models.ForeignKey(
+        'Academique.Cours',
+        on_delete=models.CASCADE
+    )
+
+    annee_academique = models.ForeignKey(
+        "Admin.AnneeAcademique",
+        on_delete=models.CASCADE
+    )
+
+    date_affectation = models.DateField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return f"{self.enseignant} - {self.cours}"

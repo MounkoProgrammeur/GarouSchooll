@@ -1,121 +1,69 @@
 {% extends "Teacher/base1.html" %}
 
-
 {% block content %}
 
 <div class="container py-4">
 
-    <h1 class="fw-bold">Mes cours</h1>
-    <p class="text-muted fs-5">Visualisez tous vos cours</p>
+    <div class="mb-4">
+        <h1 class="fw-bold fs-4 mb-1 page-title">Mes cours</h1>
+        <p class="page-subtitle mb-0">Visualisez tous vos cours</p>
+    </div>
 
-    <div class="row g-4">
+    <div class="row g-3">
 
-        <!-- Algorithme -->
-        <div class="col-lg-6">
-            <div class="course-card">
+        {% for cours in cours_list %}
+        <div class="col-md-6">
+            <div class="cours-card">
 
-                <i class="bi bi-book-fill course-icon"></i>
-
-                <h2 class="course-title mt-3">
-                    Algorithmique
-                </h2>
-
-                <p class="course-description">
-                    Introduction à l'algorithmique et à la logique de programmation
-                </p>
-
-                <div class="students">
-                    <i class="bi bi-people-fill"></i>
-                    <span>30 étudiants</span>
+                <div class="d-flex align-items-start justify-content-between mb-3">
+                    <div class="cours-icon-wrap">
+                        <i class="bi bi-book-fill"></i>
+                    </div>
+                    <span class="cours-semester-badge s{{ cours.semestre }}">
+                        Semestre {{ cours.semestre }}
+                    </span>
                 </div>
 
-                <button class="btn btn-primary btn-course">
-                    Voir
-                </button>
+                <div class="cours-title mb-2">{{ cours.nom }}</div>
+
+                <div class="cours-desc">
+                    {% if cours.description %}
+                        {{ cours.description }}
+                    {% else %}
+                        Aucune description disponible.
+                    {% endif %}
+                </div>
+
+                <div class="cours-meta d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <span>
+                            <i class="bi bi-people-fill me-1"></i>
+                            <strong>{{ cours.nb_etudiants }}</strong> étudiants
+                        </span>
+                        <span>
+                            <i class="bi bi-award me-1"></i>
+                            {{ cours.credit }} crédits
+                        </span>
+                        <span class="cours-code">{{ cours.code }}</span>
+                    </div>
+                    <a href="{% url 'cours_detail' cours.pk %}" class="btn-voir">
+                        Voir →
+                    </a>
+                </div>
 
             </div>
         </div>
-
-        <!-- Programmation Web -->
-        <div class="col-lg-6">
-            <div class="course-card">
-
-                <i class="bi bi-book-fill course-icon"></i>
-
-                <h2 class="course-title mt-3">
-                    Programmation Web
-                </h2>
-
-                <p class="course-description">
-                    Développement web avec HTML, CSS, JavaScript et PHP
-                </p>
-
-                <div class="students">
-                    <i class="bi bi-people-fill"></i>
-                    <span>300 étudiants</span>
-                </div>
-
-                <button class="btn btn-primary btn-course">
-                    Voir
-                </button>
-
+        {% empty %}
+        <div class="col-12">
+            <div class="text-center py-5">
+                <i class="bi bi-journal-x" style="font-size:3rem;color:#dee2e6"></i>
+                <p class="mt-3 text-muted">Aucun cours assigné pour le moment.</p>
             </div>
         </div>
-
-        <!-- Base de données -->
-        <div class="col-lg-6">
-            <div class="course-card">
-
-                <i class="bi bi-book-fill course-icon"></i>
-
-                <h2 class="course-title mt-3">
-                    Base de Données
-                </h2>
-
-                <p class="course-description">
-                    Conception et gestion des bases de données relationnelles
-                </p>
-
-                <div class="students">
-                    <i class="bi bi-people-fill"></i>
-                    <span>100 étudiants</span>
-                </div>
-
-                <button class="btn btn-primary btn-course">
-                    Voir
-                </button>
-
-            </div>
-        </div>
-
-        <!-- Structures de données -->
-        <div class="col-lg-6">
-            <div class="course-card">
-
-                <i class="bi bi-book-fill course-icon"></i>
-
-                <h2 class="course-title mt-3">
-                    Structures de données
-                </h2>
-
-                <p class="course-description">
-                    Étude des structures de données et des bases de données avancées
-                </p>
-
-                <div class="students">
-                    <i class="bi bi-people-fill"></i>
-                    <span>30 étudiants</span>
-                </div>
-
-                <button class="btn btn-primary btn-course">
-                    Voir
-                </button>
-
-            </div>
-        </div>
+        {% endfor %}
 
     </div>
 
 </div>
 
-{% endblock%}
+{% endblock %}

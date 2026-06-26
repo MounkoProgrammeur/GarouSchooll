@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GarouSchool — Administration</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg1: #F3F4F6;
+      --bg2: #FFFFFF;
+      --text: #616161;
+      --title: #161414;
+      --bleu: #1E90FF;
+      --button: #aed5e7;
+      --red: #F21212;
+      --success: #16A34A;
+      --danger: #D97706;
+      --sidebar-w: 250px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg1);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: var(--sidebar-w);
+      background: var(--bg2);
+      border-right: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      z-index: 1000;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar-brand {
+      padding: 20px 18px 16px;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 38px; height: 38px;
+      background: var(--bleu);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--title);
+      line-height: 1.2;
+    }
+    .brand-name span { color: var(--bleu); }
+    .brand-sub { font-size: 0.68rem; color: var(--text); }
+
+    .sidebar-nav { flex: 1; overflow-y: auto; padding: 12px 0; }
+
+    .nav-section-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #9ca3af;
+      padding: 10px 18px 4px;
+      font-weight: 600;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 9px 18px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 0;
+      transition: background 0.15s, color 0.15s;
+      position: relative;
+      cursor: pointer;
+      border: none; background: none; width: 100%; text-align: left;
+    }
+
+    .sidebar-link i { font-size: 1rem; width: 20px; flex-shrink: 0; }
+
+    .sidebar-link:hover {
+      background: var(--bg1);
+      color: var(--bleu);
+    }
+
+    .sidebar-link.active {
+      background: #EFF6FF;
+      color: var(--bleu);
+      font-weight: 600;
+    }
+
+    .sidebar-link.active::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--bleu);
+      border-radius: 0 3px 3px 0;
+    }
+
+    .badge-count {
+      margin-left: auto;
+      background: var(--bleu);
+      color: #fff;
+      font-size: 0.68rem;
+      padding: 1px 7px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .badge-warn { background: var(--danger); }
+    .badge-ok   { background: var(--success); }
+
+    .sidebar-footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 12px 18px;
+    }
+
+    .admin-card {
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .admin-avatar {
+      width: 34px; height: 34px;
+      background: var(--button);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bleu); font-size: 14px; font-weight: 700;
+    }
+
+    .admin-info { flex: 1; min-width: 0; }
+    .admin-name { font-size: 0.8rem; font-weight: 600; color: var(--title); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .admin-role { font-size: 0.68rem; color: var(--text); }
+
+    /* ===== MAIN ===== */
+    .main-wrapper {
+      margin-left: var(--sidebar-w);
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+
+    .topbar {
+      background: var(--bg2);
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0 24px;
+      height: 58px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 900;
+    }
+
+    .topbar-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--title);
+    }
+
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+
+    .icon-btn {
+      width: 36px; height: 36px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: var(--bg1);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--text); position: relative;
+      transition: background 0.15s;
+    }
+    .icon-btn:hover { background: var(--button); color: var(--bleu); }
+
+    .notif-dot {
+      position: absolute; top: 6px; right: 6px;
+      width: 7px; height: 7px;
+      background: var(--red); border-radius: 50%;
+      border: 1.5px solid var(--bg2);
+    }
+
+    .page-content { padding: 24px; flex: 1; }
+
+    /* ===== PAGES ===== */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ===== STAT CARDS ===== */
+    .stat-card {
+      background: var(--bg2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #e5e7eb;
+      display: flex; align-items: flex-start; gap: 14px;
+      transition: box-shadow 0.2s;
+    }
+    .stat-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.07); }
+
+    .stat-icon {
+      width: 46px; height: 46px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+
+    .ic-bleu   { background: #EFF6FF; color: var(--bleu); }
+    .ic-success{ background: #F0FDF4; color: var(--success); }
+    .ic-danger { background: #FFFBEB; color: var(--danger); }
+    .ic-red    { background: #FEF2F2; color: var(--red); }
+
+    .stat-value { font-size: 1.6rem; font-weight: 800; color: var(--title); line-height: 1; }
+    .stat-label { font-size: 0.78rem; color: var(--text); margin-top: 3px; }
+    .stat-trend { font-size: 0.72rem; margin-top: 6px; }
+    .trend-up   { color: var(--success); }
+    .trend-warn { color: var(--danger); }
+
+    /* ===== SECTION HEADER ===== */
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: 0.92rem; font-weight: 700; color: var(--title);
+    }
+
+    /* ===== TABLE ===== */
+    .gs-table { background: var(--bg2); border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; }
+    .gs-table table { margin: 0; }
+    .gs-table thead th {
+      background: var(--bg1);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--text);
+      font-weight: 600;
+      border: none;
+      padding: 10px 14px;
+    }
+    .gs-table tbody td {
+      font-size: 0.83rem;
+      color: var(--text);
+      padding: 11px 14px;
+      border-color: #f3f4f6;
+      vertical-align: middle;
+    }
+    .gs-table tbody tr:hover { background: #f9fafb; }
+
+    /* ===== AVATAR CHIP ===== */
+    .avatar-chip {
+      display: flex; align-items: center; gap: 9px;
+    }
+    .av { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+    .av-blue   { background: #DBEAFE; color: var(--bleu); }
+    .av-green  { background: #DCFCE7; color: var(--success); }
+    .av-orange { background: #FEF3C7; color: var(--danger); }
+
+    /* ===== BADGES ===== */
+    .gs-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 10px; border-radius: 20px;
+      font-size: 0.71rem; font-weight: 600;
+    }
+    .gs-badge.ok     { background: #DCFCE7; color: var(--success); }
+    .gs-badge.warn   { background: #FEF3C7; color: var(--danger); }
+    .gs-badge.danger { background: #FEE2E2; color: var(--red); }
+    .gs-badge.info   { background: #DBEAFE; color: var(--bleu); }
+
+    /* ===== BUTTONS ===== */
+    .btn-gs {
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .btn-gs:hover { opacity: .87; transform: translateY(-1px); }
+    .btn-gs:active { transform: translateY(0); }
+
+    .btn-primary-gs { background: var(--bleu); color: #fff; }
+    .btn-outline-gs { background: transparent; color: var(--bleu); border: 1.5px solid var(--bleu); }
+    .btn-danger-gs  { background: var(--red); color: #fff; }
+    .btn-success-gs { background: var(--success); color: #fff; }
+
+    /* ===== FILTERS BAR ===== */
+    .filters-bar {
+      background: var(--bg2);
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .gs-input, .gs-select {
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 0.82rem;
+      color: var(--title);
+      background: var(--bg1);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .gs-input:focus, .gs-select:focus { border-color: var(--bleu); background: var(--bg2); }
+    .gs-input { width: 220px; }
+
+    /* ===== MODAL-STYLE FORM ===== */
+    .gs-card {
+      background: var(--bg2);
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+    .gs-card-title {
+      font-size: 0.9rem; font-weight: 700; color: var(--title); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .gs-form-label { font-size: 0.78rem; font-weight: 600; color: var(--title); margin-bottom: 5px; }
+
+    .form-gs {
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.83rem;
+      color: var(--title);
+      width: 100%;
+      background: var(--bg1);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-gs:focus { border-color: var(--bleu); background: var(--bg2); }
+
+    .link-box {
+      background: var(--bg1);
+      border: 1.5px dashed var(--bleu);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.8rem;
+      color: var(--bleu);
+      display: flex; align-items: center; gap: 8px;
+      font-family: monospace;
+      word-break: break-all;
+    }
+
+    /* ===== PROGRESS BAR ===== */
+    .gs-progress { height: 6px; border-radius: 10px; background: #e5e7eb; overflow: hidden; margin-top: 6px; }
+    .gs-progress-bar { height: 100%; border-radius: 10px; background: var(--bleu); }
+
+    /* ===== RECENT ACTIVITY ===== */
+    .activity-item {
+      display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f3f4f6;
+    }
+    .activity-item:last-child { border: none; }
+    .act-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px;
+    }
+    .act-text { font-size: 0.81rem; color: var(--text); line-height: 1.45; }
+    .act-time { font-size: 0.7rem; color: #9ca3af; margin-top: 2px; }
+
+    /* ===== TOGGLE (mobile hamburger) ===== */
+    .mob-topbar-toggle {
+      display: none;
+      width: 36px; height: 36px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: var(--bg1);
+      align-items: center; justify-content: center;
+      cursor: pointer; color: var(--title); font-size: 1.1rem;
+    }
+
+    /* ===== BOTTOM NAV (mobile) ===== */
+    .bottom-nav {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--bg2);
+      border-top: 1px solid #e5e7eb;
+      z-index: 1100;
+      padding: 6px 0 env(safe-area-inset-bottom, 6px);
+    }
+
+    .bottom-nav-inner {
+      display: flex; justify-content: space-around; align-items: center;
+    }
+
+    .bnav-item {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      padding: 4px 8px;
+      cursor: pointer; border: none; background: none;
+      color: #9ca3af;
+      font-size: 0.62rem; font-weight: 500;
+      transition: color 0.15s;
+      min-width: 50px;
+      text-align: center;
+    }
+    .bnav-item i { font-size: 1.22rem; }
+    .bnav-item.active { color: var(--bleu); }
+    .bnav-item .bnav-dot {
+      width: 5px; height: 5px; background: var(--red); border-radius: 50%;
+      position: absolute; top: -2px; right: -2px;
+    }
+    .bnav-icon-wrap { position: relative; display: inline-flex; }
+
+    /* ===== OVERLAY ===== */
+    .sidebar-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+        box-shadow: 4px 0 20px rgba(0,0,0,0.12);
+      }
+      .sidebar.open { transform: translateX(0); }
+
+      .sidebar-overlay.show { display: block; }
+
+      .main-wrapper { margin-left: 0; padding-bottom: 70px; }
+
+      .topbar { padding: 0 14px; }
+
+      .mob-topbar-toggle { display: flex; }
+
+      .bottom-nav { display: block; }
+
+      .page-content { padding: 14px; }
+
+      .gs-input { width: 100%; }
+      .filters-bar { gap: 8px; }
+
+      .stat-card { padding: 14px; }
+      .stat-value { font-size: 1.3rem; }
+    }
+
+    /* ===== NOTES GRID ===== */
+    .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .notes-card {
+      background: var(--bg2); border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px;
+      transition: box-shadow 0.2s;
+    }
+    .notes-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+    .notes-teacher { font-size: 0.78rem; color: var(--text); margin-bottom: 4px; }
+    .notes-subject { font-size: 0.92rem; font-weight: 700; color: var(--title); margin-bottom: 10px; }
+    .notes-row { display: flex; justify-content: space-between; font-size: 0.8rem; padding: 6px 0; border-bottom: 1px solid #f3f4f6; }
+    .notes-row:last-child { border: none; }
+    .notes-student { color: var(--text); }
+    .notes-grade { font-weight: 700; color: var(--title); }
+    .notes-grade.high   { color: var(--success); }
+    .notes-grade.mid    { color: var(--danger); }
+    .notes-grade.low    { color: var(--red); }
+
+    /* mini chart bar */
+    .mini-chart { display: flex; align-items: flex-end; gap: 3px; height: 36px; margin-top: 10px; }
+    .mc-bar { flex: 1; border-radius: 3px 3px 0 0; background: var(--button); transition: background 0.2s; }
+    .mc-bar:hover { background: var(--bleu); }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar overlay (mobile) -->
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-icon"><i class="bi bi-mortarboard-fill"></i></div>
+    <div>
+      <div class="brand-name">Garou<span>School</span></div>
+      <div class="brand-sub">Panel Administrateur</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Principal</div>
+
+    <button class="sidebar-link active" onclick="showPage('dashboard', this)">
+      <i class="bi bi-grid-1x2-fill"></i> Tableau de bord
+    </button>
+
+    <button class="sidebar-link" onclick="showPage('inscriptions', this)">
+      <i class="bi bi-person-plus-fill"></i> Inscriptions
+      <span class="badge-count badge-warn">12</span>
+    </button>
+
+    <div class="nav-section-label">Gestion</div>
+
+    <button class="sidebar-link" onclick="showPage('etudiants', this)">
+      <i class="bi bi-people-fill"></i> Étudiants
+    </button>
+
+    <button class="sidebar-link" onclick="showPage('enseignants', this)">
+      <i class="bi bi-person-video3"></i> Enseignants
+    </button>
+
+    <button class="sidebar-link" onclick="showPage('notes', this)">
+      <i class="bi bi-journal-check"></i> Notes & Évaluations
+      <span class="badge-count">3</span>
+    </button>
+
+    <div class="nav-section-label">Finances</div>
+
+    <button class="sidebar-link" onclick="showPage('paiements', this)">
+      <i class="bi bi-receipt-cutoff"></i> Paiements / Reçus
+      <span class="badge-count badge-warn">8</span>
+    </button>
+
+    <div class="nav-section-label">Système</div>
+
+    <button class="sidebar-link" onclick="showPage('filieres', this)">
+      <i class="bi bi-diagram-3-fill"></i> Filières & Niveaux
+    </button>
+
+    <button class="sidebar-link" onclick="showPage('parametres', this)">
+      <i class="bi bi-gear-fill"></i> Paramètres
+    </button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="admin-card">
+      <div class="admin-avatar">AD</div>
+      <div class="admin-info">
+        <div class="admin-name">Admin Général</div>
+        <div class="admin-role">Administrateur</div>
+      </div>
+      <div class="icon-btn" style="width:28px;height:28px;font-size:.85rem;" title="Déconnexion">
+        <i class="bi bi-box-arrow-right"></i>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<div class="main-wrapper">
+  <!-- Topbar -->
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="mob-topbar-toggle" onclick="openSidebar()"><i class="bi bi-list"></i></div>
+      <div class="topbar-title" id="topbar-title">Tableau de bord</div>
+    </div>
+    <div class="topbar-right">
+      <div class="icon-btn" title="Rechercher"><i class="bi bi-search"></i></div>
+      <div class="icon-btn" title="Notifications">
+        <i class="bi bi-bell"></i>
+        <div class="notif-dot"></div>
+      </div>
+      <div class="icon-btn" title="Profil"><i class="bi bi-person-circle"></i></div>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- ======================== PAGE DASHBOARD ======================== -->
+    <div class="page active" id="page-dashboard">
+      <!-- Stat cards -->
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="stat-icon ic-bleu"><i class="bi bi-people-fill"></i></div>
+            <div>
+              <div class="stat-value">342</div>
+              <div class="stat-label">Étudiants inscrits</div>
+              <div class="stat-trend trend-up"><i class="bi bi-arrow-up-short"></i>+18 ce mois</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="stat-icon ic-success"><i class="bi bi-person-video3"></i></div>
+            <div>
+              <div class="stat-value">27</div>
+              <div class="stat-label">Enseignants actifs</div>
+              <div class="stat-trend trend-up"><i class="bi bi-arrow-up-short"></i>+2 ce mois</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="stat-icon ic-danger"><i class="bi bi-receipt-cutoff"></i></div>
+            <div>
+              <div class="stat-value">54</div>
+              <div class="stat-label">Reçus de paiement</div>
+              <div class="stat-trend trend-warn"><i class="bi bi-clock"></i> 8 en attente</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="stat-icon ic-red"><i class="bi bi-exclamation-triangle-fill"></i></div>
+            <div>
+              <div class="stat-value">12</div>
+              <div class="stat-label">Inscriptions en attente</div>
+              <div class="stat-trend" style="color:var(--red)"><i class="bi bi-arrow-right-short"></i> À traiter</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <!-- Répartition filières -->
+        <div class="col-lg-5">
+          <div class="gs-card h-100">
+            <div class="gs-card-title"><i class="bi bi-diagram-3-fill" style="color:var(--bleu)"></i> Répartition par filière</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:.8rem;"><span>Informatique</span><strong>128</strong></div>
+                <div class="gs-progress"><div class="gs-progress-bar" style="width:75%"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:.8rem;"><span>Mathématiques</span><strong>89</strong></div>
+                <div class="gs-progress"><div class="gs-progress-bar" style="width:52%;background:var(--success)"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:.8rem;"><span>Physique</span><strong>74</strong></div>
+                <div class="gs-progress"><div class="gs-progress-bar" style="width:43%;background:var(--danger)"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:.8rem;"><span>Chimie</span><strong>51</strong></div>
+                <div class="gs-progress"><div class="gs-progress-bar" style="width:30%;background:var(--bleu);opacity:.6"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activité récente -->
+        <div class="col-lg-7">
+          <div class="gs-card h-100">
+            <div class="gs-card-title"><i class="bi bi-clock-history" style="color:var(--bleu)"></i> Activité récente</div>
+            <div class="activity-item">
+              <div class="act-dot" style="background:var(--bleu)"></div>
+              <div><div class="act-text">Nouvel étudiant inscrit : <strong>Ngom Fatoumata</strong> (Informatique L1)</div><div class="act-time">Il y a 12 min</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="act-dot" style="background:var(--danger)"></div>
+              <div><div class="act-text">Reçu de paiement soumis par <strong>Amadou Diallo</strong></div><div class="act-time">Il y a 28 min</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="act-dot" style="background:var(--success)"></div>
+              <div><div class="act-text">Notes publiées par <strong>Prof. Bello</strong> — Algorithmique L2</div><div class="act-time">Il y a 1h</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="act-dot" style="background:var(--red)"></div>
+              <div><div class="act-text">Inscription rejetée : dossier incomplet (<strong>Koné Ibrahim</strong>)</div><div class="act-time">Il y a 2h</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="act-dot" style="background:var(--bleu)"></div>
+              <div><div class="act-text">Nouveau compte enseignant créé : <strong>Dr. Hadja Mariama</strong></div><div class="act-time">Aujourd'hui 08:14</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paiements en attente -->
+      <div class="section-header">
+        <div class="section-title"><i class="bi bi-receipt-cutoff me-1" style="color:var(--danger)"></i>Reçus en attente de validation</div>
+        <button class="btn-gs btn-outline-gs" onclick="showPage('paiements', document.querySelector('[onclick*=paiements]'))">Voir tout</button>
+      </div>
+      <div class="gs-table">
+        <table class="table table-borderless mb-0">
+          <thead><tr><th>Étudiant</th><th>Montant</th><th>Date</th><th>Statut</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="avatar-chip"><div class="av av-blue">AM</div>Amadou Diallo</div></td>
+              <td><strong>85 000 FCFA</strong></td>
+              <td>25/06/2026</td>
+              <td><span class="gs-badge warn"><i class="bi bi-hourglass-split"></i> En attente</span></td>
+              <td><button class="btn-gs btn-success-gs" style="padding:4px 10px;font-size:.73rem;"><i class="bi bi-check-lg"></i> Valider</button></td>
+            </tr>
+            <tr>
+              <td><div class="avatar-chip"><div class="av av-green">SB</div>Salimata Bah</div></td>
+              <td><strong>85 000 FCFA</strong></td>
+              <td>24/06/2026</td>
+              <td><span class="gs-badge warn"><i class="bi bi-hourglass-split"></i> En attente</span></td>
+              <td><button class="btn-gs btn-success-gs" style="padding:4px 10px;font-size:.73rem;"><i class="bi bi-check-lg"></i> Valider</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ======================== PAGE INSCRIPTIONS ======================== -->
+    <div class="page" id="page-inscriptions">
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <div class="gs-card">
+            <div class="gs-card-title"><i class="bi bi-person-plus-fill" style="color:var(--bleu)"></i> Nouvelle inscription</div>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="gs-form-label">Nom</div>
+                <input type="text" class="form-gs" placeholder="Nom de famille"/>
+              </div>
+              <div class="col-6">
+                <div class="gs-form-label">Prénom(s)</div>
+                <input type="text" class="form-gs" placeholder="Prénom(s)"/>
+              </div>
+              <div class="col-6">
+                <div class="gs-form-label">Email</div>
+                <input type="email" class="form-gs" placeholder="email@exemple.com"/>
+              </div>
+              <div class="col-6">
+                <div class="gs-form-label">Téléphone</div>
+                <input type="tel" class="form-gs" placeholder="+237 6XX XXX XXX"/>
+              </div>
+              <div class="col-6">
+                <div class="gs-form-label">Filière</div>
+                <select class="form-gs">
+                  <option>Informatique</option>
+                  <option>Mathématiques</option>
+                  <option>Physique</option>
+                  <option>Chimie</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <div class="gs-form-label">Niveau</div>
+                <select class="form-gs">
+                  <option>L1</option><option>L2</option><option>L3</option>
+                  <option>M1</option><option>M2</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <div class="gs-form-label">Date de naissance</div>
+                <input type="date" class="form-gs"/>
+              </div>
+              <div class="col-12">
+                <button class="btn-gs btn-primary-gs w-100" onclick="generateLink()"><i class="bi bi-person-plus-fill"></i> Inscrire & Générer le lien</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="gs-card" id="link-result" style="display:none;">
+            <div class="gs-card-title"><i class="bi bi-link-45deg" style="color:var(--success)"></i> Lien d'accès généré</div>
+            <p style="font-size:.82rem;margin-bottom:10px;color:var(--text);">Partagez ce lien avec l'étudiant pour qu'il crée son compte et accède à son espace personnel.</p>
+            <div class="link-box" id="generated-link"><i class="bi bi-link-45deg"></i> https://garouschool.cm/register/abc123xyz</div>
+            <div style="display:flex;gap:8px;margin-top:12px;">
+              <button class="btn-gs btn-outline-gs" onclick="copyLink()"><i class="bi bi-clipboard"></i> Copier</button>
+              <button class="btn-gs btn-primary-gs"><i class="bi bi-envelope-fill"></i> Envoyer par mail</button>
+              <button class="btn-gs" style="background:#25D366;color:#fff"><i class="bi bi-whatsapp"></i> WhatsApp</button>
+            </div>
+          </div>
+
+          <div class="gs-card">
+            <div class="gs-card-title"><i class="bi bi-hourglass-split" style="color:var(--danger)"></i> Inscriptions en attente (12)</div>
+            <div class="gs-table" style="border:none;">
+              <table class="table table-borderless mb-0">
+                <thead><tr><th>Nom</th><th>Filière</th><th>Statut</th><th></th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><div class="avatar-chip"><div class="av av-blue">KI</div>Koné Ibrahim</div></td>
+                    <td>Informatique L1</td>
+                    <td><span class="gs-badge warn">En attente</span></td>
+                    <td><button class="btn-gs btn-primary-gs" style="padding:3px 9px;font-size:.72rem;">Voir</button></td>
+                  </tr>
+                  <tr>
+                    <td><div class="avatar-chip"><div class="av av-green">NF</div>Ngom Fatoumata</div></td>
+                    <td>Maths L1</td>
+                    <td><span class="gs-badge warn">En attente</span></td>
+                    <td><button class="btn-gs btn-primary-gs" style="padding:3px 9px;font-size:.72rem;">Voir</button></td>
+                  </tr>
+                  <tr>
+                    <td><div class="avatar-chip"><div class="av av-orange">TC</div>Tchouamou C.</div></td>
+                    <td>Physique L2</td>
+                    <td><span class="gs-badge danger">Incomplet</span></td>
+                    <td><button class="btn-gs btn-primary-gs" style="padding:3px 9px;font-size:.72rem;">Voir</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== PAGE ÉTUDIANTS ======================== -->
+    <div class="page" id="page-etudiants">
+      <div class="filters-bar">
+        <input type="text" class="gs-input" placeholder="🔍  Rechercher un étudiant..."/>
+        <select class="gs-select">
+          <option value="">Toutes les filières</option>
+          <option>Informatique</option>
+          <option>Mathématiques</option>
+          <option>Physique</option>
+          <option>Chimie</option>
+        </select>
+        <select class="gs-select">
+          <option value="">Tous les niveaux</option>
+          <option>L1</option><option>L2</option><option>L3</option>
+          <option>M1</option><option>M2</option>
+        </select>
+        <select class="gs-select">
+          <option value="">Paiement</option>
+          <option>Payé</option><option>En attente</option><option>Non payé</option>
+        </select>
+        <button class="btn-gs btn-primary-gs ms-auto"><i class="bi bi-plus-lg"></i> Nouvel étudiant</button>
+      </div>
+      <div class="gs-table">
+        <table class="table table-borderless mb-0">
+          <thead><tr><th>Étudiant</th><th>Matricule</th><th>Filière</th><th>Niveau</th><th>Paiement</th><th>Espace</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="avatar-chip"><div class="av av-blue">AD</div>Amadou Diallo</div></td>
+              <td style="font-family:monospace;font-size:.78rem;">INF-2024-001</td>
+              <td>Informatique</td><td>L2</td>
+              <td><span class="gs-badge ok"><i class="bi bi-check-circle-fill"></i> Payé</span></td>
+              <td><span class="gs-badge info"><i class="bi bi-person-check-fill"></i> Actif</span></td>
+              <td>
+                <div style="display:flex;gap:5px;">
+                  <button class="btn-gs btn-outline-gs" style="padding:3px 8px;font-size:.72rem;"><i class="bi bi-eye"></i></button>
+                  <button class="btn-gs btn-primary-gs" style="padding:3px 8px;font-size:.72rem;"><i class="bi bi-pencil"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="avatar-chip"><div class="av av-green">SB</div>Salimata Bah</div></td>
+              <td style="font-family:monospace;font-size:.78rem;">MAT-2024-015</td>
+              <td>Mathématiques</td><td>L1</td>
+              <td><span class="gs-badge warn"><i class="bi bi-hourglass-split"></i> En attente</span></td>
+              <td><span class="gs-badge info"><i class="bi bi-person-check-fill"></i> Actif</span></td>
+              <td>
+                <div style="display:flex;gap:5px;">
+                  <button class="btn-gs btn-outline-gs" style="padding:3px 8px;font-size:.72rem;"><i class="bi bi-eye"></i></button>
+                  <button class="btn-gs btn-primary-gs" style="padding:3px 8px;font-size:.72rem;"><i class="bi bi-pencil"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="avatar-chip"><div class="av av-orange">MK</div>Moussa Kouyaté</div></td>
+              <td style="font-family:monospace;font-size:.78rem;">PHY-2023-088</td>
+              <td>Physique</td><td>L3</td>
+              <td><span class="gs-badge danger"><i class="bi bi-x-circle-fill"></i> Non payé</span></td>
+              <td><span class="gs-badge warn">Limité</span></td>
+              <td>
+                <div style="display:flex;gap:5px;">
+                  <button class="btn-gs btn-outline-gs" style="padding:3px 8px;font-size:.72rem;"><i class="bi bi-eye"></i></button>
+                  <button class="btn-gs btn-primary-gs" style="padding:3px 8px;font-size:.72rem;"><i class="bi bi-pencil"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:.8rem;color:var(--text);">
+        <span>Affichage 1–3 sur 342 étudiants</span>
+        <div style="display:flex;gap:6px;">
+          <button class="btn-gs btn-outline-gs" style="padding:4px 10px;font-size:.78rem;">‹ Précédent</button>
+          <button class="btn-gs btn-primary-gs" style="padding:4px 10px;font-size:.78rem;">Suivant ›</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== PAGE ENSEIGNANTS ======================== -->
+    <div class="page" id="page-enseignants">
+      <div class="filters-bar">
+        <input type="text" class="gs-input" placeholder="🔍  Rechercher un enseignant..."/>
+        <select class="gs-select">
+          <option>Toutes les filières</option>
+          <option>Informatique</option><option>Mathématiques</option><option>Physique</option>
+        </select>
+        <select class="gs-select">
+          <option>Tous les statuts</option>
+          <option>Actif</option><option>Inactif</option>
+        </select>
+        <button class="btn-gs btn-primary-gs ms-auto"><i class="bi bi-plus-lg"></i> Ajouter enseignant</button>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6 col-xl-4">
+          <div class="gs-card" style="padding:16px;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+              <div class="av av-blue" style="width:44px;height:44px;font-size:.9rem;border-radius:10px;">PB</div>
+              <div>
+                <div style="font-weight:700;color:var(--title);font-size:.92rem;">Prof. Bello Hamidou</div>
+                <div style="font-size:.74rem;color:var(--text);">Algorithmique · Informatique</div>
+              </div>
+              <span class="gs-badge ok ms-auto">Actif</span>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="gs-badge info">L1</span><span class="gs-badge info">L2</span>
+            </div>
+            <div style="margin-top:10px;font-size:.78rem;color:var(--text);">
+              <i class="bi bi-envelope me-1"></i>bello.h@garouschool.cm
+            </div>
+            <div style="margin-top:5px;font-size:.78rem;color:var(--text);">
+              <i class="bi bi-journal-check me-1"></i>3 évaluations saisies ce semestre
+            </div>
+            <div style="display:flex;gap:6px;margin-top:12px;">
+              <button class="btn-gs btn-outline-gs" style="padding:4px 10px;font-size:.74rem;"><i class="bi bi-eye"></i> Voir</button>
+              <button class="btn-gs btn-primary-gs" style="padding:4px 10px;font-size:.74rem;"><i class="bi bi-pencil"></i> Modifier</button>
+              <button class="btn-gs btn-danger-gs" style="padding:4px 10px;font-size:.74rem;"><i class="bi bi-trash"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="gs-card" style="padding:16px;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+              <div class="av av-green" style="width:44px;height:44px;font-size:.9rem;border-radius:10px;">HM</div>
+              <div>
+                <div style="font-weight:700;color:var(--title);font-size:.92rem;">Dr. Hadja Mariama</div>
+                <div style="font-size:.74rem;color:var(--text);">Analyse · Mathématiques</div>
+              </div>
+              <span class="gs-badge ok ms-auto">Actif</span>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="gs-badge info">L1</span><span class="gs-badge info">L3</span><span class="gs-badge info">M1</span>
+            </div>
+            <div style="margin-top:10px;font-size:.78rem;color:var(--text);">
+              <i class="bi bi-envelope me-1"></i>hadja.m@garouschool.cm
+            </div>
+            <div style="margin-top:5px;font-size:.78rem;color:var(--text);">
+              <i class="bi bi-journal-check me-1"></i>5 évaluations saisies ce semestre
+            </div>
+            <div style="display:flex;gap:6px;margin-top:12px;">
+              <button class="btn-gs btn-outline-gs" style="padding:4px 10px;font-size:.74rem;"><i class="bi bi-eye"></i> Voir</button>
+              <button class="btn-gs btn-primary-gs" style="padding:4px 10px;font-size:.74rem;"><i class="bi bi-pencil"></i> Modifier</button>
+              <button class="btn-gs btn-danger-gs" style="padding:4px 10px;font-size:.74rem;"><i class="bi bi-trash"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <div class="gs-card" style="padding:16px;opacity:.7;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+              <div class="av av-orange" style="width:44px;height:44px;font-size:.9rem;border-radius:10px;">YO</div>
+              <div>
+                <div style="font-weight:700;color:var(--title);font-size:.92rem;">Yonas Oumar</div>
+                <div style="font-size:.74rem;color:var(--text);">Thermodynamique · Physique</div>
+              </div>
+              <span class="gs-badge warn ms-auto">Inactif</span>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="gs-badge info">L2</span>
+            </div>
+            <div style="margin-top:10px;font-size:.78rem;color:var(--text);">
+              <i class="bi bi-envelope me-1"></i>y.oumar@garouschool.cm
+            </div>
+            <div style="margin-top:5px;font-size:.78rem;color:var(--text);">
+              <i class="bi bi-journal-check me-1"></i>0 évaluation ce semestre
+            </div>
+            <div style="display:flex;gap:6px;margin-top:12px;">
+              <button class="btn-gs btn-outline-gs" style="padding:4px 10px;font-size:.74rem;"><i class="bi bi-eye"></i> Voir</button>
+              <button class="btn-gs btn-primary-gs" style="padding:4px 10px;font-size:.74rem;"><i class="bi bi-pencil"></i> Modifier</button>
+              <button class="btn-gs btn-danger-gs" style="padding:4px 10px;font-size:.74rem;"><i class="bi bi-trash"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== PAGE NOTES ======================== -->
+    <div class="page" id="page-notes">
+      <div class="filters-bar">
+        <select class="gs-select">
+          <option>Tous les enseignants</option>
+          <option>Prof. Bello</option>
+          <option>Dr. Hadja Mariama</option>
+        </select>
+        <select class="gs-select">
+          <option>Toutes les filières</option>
+          <option>Informatique</option><option>Mathématiques</option>
+        </select>
+        <select class="gs-select">
+          <option>Tous les semestres</option>
+          <option>Semestre 1</option><option>Semestre 2</option>
+        </select>
+        <button class="btn-gs btn-primary-gs ms-auto"><i class="bi bi-download"></i> Exporter PDF</button>
+      </div>
+      <div class="notes-grid">
+        <div class="notes-card">
+          <div class="notes-teacher"><i class="bi bi-person-video3 me-1" style="color:var(--bleu)"></i>Prof. Bello Hamidou</div>
+          <div class="notes-subject">Algorithmique — L2 Informatique</div>
+          <div class="notes-row"><span class="notes-student">Amadou Diallo</span><span class="notes-grade high">16.5/20</span></div>
+          <div class="notes-row"><span class="notes-student">Salimata Bah</span><span class="notes-grade mid">12/20</span></div>
+          <div class="notes-row"><span class="notes-student">Kouyaté Moussa</span><span class="notes-grade low">7/20</span></div>
+          <div class="notes-row"><span class="notes-student">Fatoumata Ngom</span><span class="notes-grade high">18/20</span></div>
+          <div class="mini-chart">
+            <div class="mc-bar" style="height:60%"></div>
+            <div class="mc-bar" style="height:40%"></div>
+            <div class="mc-bar" style="height:80%"></div>
+            <div class="mc-bar" style="height:90%"></div>
+            <div class="mc-bar" style="height:35%"></div>
+            <div class="mc-bar" style="height:70%"></div>
+          </div>
+          <div style="font-size:.74rem;color:var(--text);margin-top:6px;">Moy. de classe : <strong style="color:var(--title)">13.4/20</strong></div>
+          <div style="margin-top:8px;">
+            <span class="gs-badge ok"><i class="bi bi-check-circle-fill"></i> Publié</span>
+          </div>
+        </div>
+
+        <div class="notes-card">
+          <div class="notes-teacher"><i class="bi bi-person-video3 me-1" style="color:var(--bleu)"></i>Dr. Hadja Mariama</div>
+          <div class="notes-subject">Analyse Numérique — L3 Maths</div>
+          <div class="notes-row"><span class="notes-student">Ibrahima Sow</span><span class="notes-grade high">14/20</span></div>
+          <div class="notes-row"><span class="notes-student">Aïcha Traoré</span><span class="notes-grade high">15.5/20</span></div>
+          <div class="notes-row"><span class="notes-student">Coulibaly B.</span><span class="notes-grade mid">11/20</span></div>
+          <div class="mini-chart">
+            <div class="mc-bar" style="height:70%"></div>
+            <div class="mc-bar" style="height:78%"></div>
+            <div class="mc-bar" style="height:55%"></div>
+            <div class="mc-bar" style="height:85%"></div>
+            <div class="mc-bar" style="height:65%"></div>
+          </div>
+          <div style="font-size:.74rem;color:var(--text);margin-top:6px;">Moy. de classe : <strong style="color:var(--title)">13.8/20</strong></div>
+          <div style="margin-top:8px;">
+            <span class="gs-badge ok"><i class="bi bi-check-circle-fill"></i> Publié</span>
+          </div>
+        </div>
+
+        <div class="notes-card">
+          <div class="notes-teacher"><i class="bi bi-person-video3 me-1" style="color:var(--bleu)"></i>Prof. Bello Hamidou</div>
+          <div class="notes-subject">Structures de Données — L1 Info</div>
+          <div class="notes-row"><span class="notes-student">Diallo Moussa</span><span class="notes-grade mid">10/20</span></div>
+          <div class="notes-row"><span class="notes-student">Koné Awa</span><span class="notes-grade high">17/20</span></div>
+          <div class="notes-row"><span class="notes-student">Bamba Seydou</span><span class="notes-grade low">6.5/20</span></div>
+          <div class="mini-chart">
+            <div class="mc-bar" style="height:50%"></div>
+            <div class="mc-bar" style="height:85%"></div>
+            <div class="mc-bar" style="height:33%"></div>
+            <div class="mc-bar" style="height:60%"></div>
+            <div class="mc-bar" style="height:44%"></div>
+          </div>
+          <div style="font-size:.74rem;color:var(--text);margin-top:6px;">Moy. de classe : <strong style="color:var(--title)">11.2/20</strong></div>
+          <div style="margin-top:8px;">
+            <span class="gs-badge warn"><i class="bi bi-hourglass-split"></i> En cours de saisie</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== PAGE PAIEMENTS ======================== -->
+    <div class="page" id="page-paiements">
+      <div class="row g-3 mb-3">
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="stat-icon ic-success"><i class="bi bi-check-circle-fill"></i></div>
+            <div><div class="stat-value">46</div><div class="stat-label">Paiements validés</div></div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="stat-icon ic-danger"><i class="bi bi-hourglass-split"></i></div>
+            <div><div class="stat-value">8</div><div class="stat-label">En attente</div></div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="stat-icon ic-red"><i class="bi bi-x-circle-fill"></i></div>
+            <div><div class="stat-value">12</div><div class="stat-label">Non payés</div></div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="stat-icon ic-bleu"><i class="bi bi-cash-stack"></i></div>
+            <div><div class="stat-value" style="font-size:1.1rem;">29,1M</div><div class="stat-label">Total collecté (FCFA)</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="filters-bar">
+        <input type="text" class="gs-input" placeholder="🔍  Rechercher..."/>
+        <select class="gs-select">
+          <option>Tous les statuts</option><option>Validé</option><option>En attente</option><option>Non payé</option>
+        </select>
+        <button class="btn-gs btn-primary-gs ms-auto"><i class="bi bi-download"></i> Exporter</button>
+      </div>
+      <div class="gs-table">
+        <table class="table table-borderless mb-0">
+          <thead><tr><th>Étudiant</th><th>Montant</th><th>Reçu</th><th>Date</th><th>Statut</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="avatar-chip"><div class="av av-blue">AD</div>Amadou Diallo</div></td>
+              <td><strong>85 000 FCFA</strong></td>
+              <td><a href="#" style="color:var(--bleu);font-size:.78rem;"><i class="bi bi-file-earmark-pdf me-1"></i>recu_001.pdf</a></td>
+              <td>25/06/2026</td>
+              <td><span class="gs-badge warn">En attente</span></td>
+              <td><div style="display:flex;gap:5px;">
+                <button class="btn-gs btn-success-gs" style="padding:3px 9px;font-size:.73rem;"><i class="bi bi-check-lg"></i> Valider</button>
+                <button class="btn-gs btn-danger-gs" style="padding:3px 9px;font-size:.73rem;"><i class="bi bi-x-lg"></i></button>
+              </div></td>
+            </tr>
+            <tr>
+              <td><div class="avatar-chip"><div class="av av-green">SB</div>Salimata Bah</div></td>
+              <td><strong>85 000 FCFA</strong></td>
+              <td><a href="#" style="color:var(--bleu);font-size:.78rem;"><i class="bi bi-file-earmark-pdf me-1"></i>recu_002.pdf</a></td>
+              <td>24/06/2026</td>
+              <td><span class="gs-badge ok">Validé</span></td>
+              <td><button class="btn-gs btn-outline-gs" style="padding:3px 9px;font-size:.73rem;"><i class="bi bi-eye"></i> Voir</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ======================== PAGE FILIÈRES ======================== -->
+    <div class="page" id="page-filieres">
+      <div class="row g-3">
+        <div class="col-lg-5">
+          <div class="gs-card">
+            <div class="gs-card-title"><i class="bi bi-plus-circle-fill" style="color:var(--bleu)"></i> Ajouter une filière</div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div>
+                <div class="gs-form-label">Nom de la filière</div>
+                <input type="text" class="form-gs" placeholder="ex: Informatique"/>
+              </div>
+              <div>
+                <div class="gs-form-label">Code</div>
+                <input type="text" class="form-gs" placeholder="ex: INF"/>
+              </div>
+              <div>
+                <div class="gs-form-label">Responsable</div>
+                <select class="form-gs">
+                  <option>Prof. Bello Hamidou</option>
+                  <option>Dr. Hadja Mariama</option>
+                </select>
+              </div>
+              <button class="btn-gs btn-primary-gs"><i class="bi bi-plus-lg"></i> Ajouter</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="gs-card">
+            <div class="gs-card-title"><i class="bi bi-diagram-3-fill" style="color:var(--bleu)"></i> Filières existantes</div>
+            <div class="gs-table" style="border:none;">
+              <table class="table table-borderless mb-0">
+                <thead><tr><th>Code</th><th>Filière</th><th>Responsable</th><th>Étudiants</th><th></th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><span class="gs-badge info">INF</span></td>
+                    <td style="font-weight:600;color:var(--title)">Informatique</td>
+                    <td>Prof. Bello</td>
+                    <td>128</td>
+                    <td><div style="display:flex;gap:4px;">
+                      <button class="btn-gs btn-outline-gs" style="padding:2px 7px;font-size:.72rem;"><i class="bi bi-pencil"></i></button>
+                      <button class="btn-gs btn-danger-gs" style="padding:2px 7px;font-size:.72rem;"><i class="bi bi-trash"></i></button>
+                    </div></td>
+                  </tr>
+                  <tr>
+                    <td><span class="gs-badge info">MAT</span></td>
+                    <td style="font-weight:600;color:var(--title)">Mathématiques</td>
+                    <td>Dr. Hadja</td>
+                    <td>89</td>
+                    <td><div style="display:flex;gap:4px;">
+                      <button class="btn-gs btn-outline-gs" style="padding:2px 7px;font-size:.72rem;"><i class="bi bi-pencil"></i></button>
+                      <button class="btn-gs btn-danger-gs" style="padding:2px 7px;font-size:.72rem;"><i class="bi bi-trash"></i></button>
+                    </div></td>
+                  </tr>
+                  <tr>
+                    <td><span class="gs-badge info">PHY</span></td>
+                    <td style="font-weight:600;color:var(--title)">Physique</td>
+                    <td>Yonas Oumar</td>
+                    <td>74</td>
+                    <td><div style="display:flex;gap:4px;">
+                      <button class="btn-gs btn-outline-gs" style="padding:2px 7px;font-size:.72rem;"><i class="bi bi-pencil"></i></button>
+                      <button class="btn-gs btn-danger-gs" style="padding:2px 7px;font-size:.72rem;"><i class="bi bi-trash"></i></button>
+                    </div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== PAGE PARAMÈTRES ======================== -->
+    <div class="page" id="page-parametres">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="gs-card">
+            <div class="gs-card-title"><i class="bi bi-building" style="color:var(--bleu)"></i> Informations de l'établissement</div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div><div class="gs-form-label">Nom de l'établissement</div><input class="form-gs" value="Université de Garoua — Faculté des Sciences"/></div>
+              <div><div class="gs-form-label">Email de contact</div><input class="form-gs" value="contact@garouschool.cm"/></div>
+              <div><div class="gs-form-label">Téléphone</div><input class="form-gs" value="+237 222 XX XX XX"/></div>
+              <div><div class="gs-form-label">Année académique</div><select class="form-gs"><option>2025–2026</option><option>2024–2025</option></select></div>
+              <button class="btn-gs btn-primary-gs"><i class="bi bi-floppy"></i> Enregistrer</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="gs-card">
+            <div class="gs-card-title"><i class="bi bi-cash-coin" style="color:var(--bleu)"></i> Scolarité & Paiements</div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div><div class="gs-form-label">Montant de la scolarité (FCFA)</div><input class="form-gs" value="85 000"/></div>
+              <div><div class="gs-form-label">Date limite de paiement</div><input type="date" class="form-gs"/></div>
+              <div><div class="gs-form-label">Méthodes de paiement acceptées</div>
+                <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;font-size:.82rem;">
+                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" checked/> Virement bancaire</label>
+                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" checked/> Mobile Money (Orange / MTN)</label>
+                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox"/> Paiement en caisse</label>
+                </div>
+              </div>
+              <button class="btn-gs btn-primary-gs"><i class="bi bi-floppy"></i> Enregistrer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-content -->
+</div><!-- /main-wrapper -->
+
+<!-- ===== BOTTOM NAV (mobile) ===== -->
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <button class="bnav-item active" onclick="showPage('dashboard', null, this)" data-page="dashboard">
+      <i class="bi bi-grid-1x2-fill"></i>Accueil
+    </button>
+    <button class="bnav-item" onclick="showPage('inscriptions', null, this)" data-page="inscriptions">
+      <div class="bnav-icon-wrap"><i class="bi bi-person-plus-fill"></i><span class="bnav-dot"></span></div>Inscrip.
+    </button>
+    <button class="bnav-item" onclick="showPage('etudiants', null, this)" data-page="etudiants">
+      <i class="bi bi-people-fill"></i>Étudiants
+    </button>
+    <button class="bnav-item" onclick="showPage('enseignants', null, this)" data-page="enseignants">
+      <i class="bi bi-person-video3"></i>Profs
+    </button>
+    <button class="bnav-item" onclick="showPage('notes', null, this)" data-page="notes">
+      <i class="bi bi-journal-check"></i>Notes
+    </button>
+    <button class="bnav-item" onclick="showPage('paiements', null, this)" data-page="paiements">
+      <div class="bnav-icon-wrap"><i class="bi bi-receipt-cutoff"></i><span class="bnav-dot"></span></div>Reçus
+    </button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const pageTitles = {
+    dashboard:    'Tableau de bord',
+    inscriptions: 'Inscriptions',
+    etudiants:    'Étudiants',
+    enseignants:  'Enseignants',
+    notes:        'Notes & Évaluations',
+    paiements:    'Paiements / Reçus',
+    filieres:     'Filières & Niveaux',
+    parametres:   'Paramètres',
+  };
+
+  function showPage(pageId, sidebarBtn, bnavBtn) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + pageId).classList.add('active');
+
+    // Sidebar active link
+    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+    if (sidebarBtn) sidebarBtn.classList.add('active');
+
+    // Bottom nav active
+    document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
+    if (bnavBtn) {
+      bnavBtn.classList.add('active');
+    } else {
+      // sync bottom nav
+      const bn = document.querySelector(`.bnav-item[data-page="${pageId}"]`);
+      if (bn) bn.classList.add('active');
+    }
+
+    // Update topbar title
+    document.getElementById('topbar-title').textContent = pageTitles[pageId] || pageId;
+
+    // Close sidebar on mobile
+    if (window.innerWidth < 769) closeSidebar();
+  }
+
+  function openSidebar() {
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('overlay').classList.add('show');
+  }
+
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('show');
+  }
+
+  function generateLink() {
+    const token = Math.random().toString(36).substring(2, 10);
+    document.getElementById('generated-link').innerHTML =
+      `<i class="bi bi-link-45deg"></i> https://garouschool.cm/register/${token}`;
+    document.getElementById('link-result').style.display = 'block';
+    document.getElementById('link-result').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function copyLink() {
+    const text = document.getElementById('generated-link').innerText.trim();
+    navigator.clipboard.writeText(text).then(() => {
+      alert('Lien copié !');
+    });
+  }
+</script>
+</body>
+</html>

@@ -417,13 +417,14 @@
           <h1 class="fw-bold mb-1" style="font-size:1.875rem;color:var(--title);">Bienvenue</h1>
           <p class="mb-4" style="color:var(--text);">Connectez-vous à votre espace personnel.</p>
 
-          <form onsubmit="event.preventDefault(); handleLogin();">
+          <form method="POST">
+            {% csrf_token %}
 
             <div class="mb-3">
               <label class="d-block mb-1 fw-medium" style="font-size:0.875rem;color:var(--title);">Adresse Email</label>
               <div class="input-icon-wrapper">
                 <i data-lucide="mail" class="input-icon" style="width:18px;height:18px;"></i>
-                <input type="email" placeholder="jean@garouschool.com" class="form-input-custom" required>
+                <input type="email" name="email" placeholder="jean@garouschool.com" class="form-input-custom" required>
               </div>
             </div>
 
@@ -431,7 +432,7 @@
               <label class="d-block mb-1 fw-medium" style="font-size:0.875rem;color:var(--title);">Mot de passe</label>
               <div class="input-icon-wrapper">
                 <i data-lucide="lock" class="input-icon" style="width:18px;height:18px;"></i>
-                <input type="password" placeholder="••••••••" class="form-input-custom" required>
+                <input type="password" name="password" placeholder="••••••••" class="form-input-custom" required>
               </div>
             </div>
 
@@ -516,9 +517,6 @@
     setTimeout(() => lucide.createIcons(), 50);
   }
 
-    function handleLogin() {
-        alert('Fonction de connexion à implémenter');
-  }
 </script>
 </body>
 </html>
